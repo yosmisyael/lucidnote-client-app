@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;400;600&family=Raleway&display=swap');
+
+:root {
+  --primary-color: #16171A;
+  --secondary-color: #2B2C2F;
+  --accent-color: #35383B;
+  --alternative-color: #1F2225;
+  --text-primary: #CCD6DB;
+  --text-secondary: #989DA1;
+  --text-accent: #275774;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter';
+}
+
+body {
+  background-color: var(--primary-color);
+}

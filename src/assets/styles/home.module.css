@@ -1,0 +1,27 @@
+.container {
+  min-height: 100vh;
+  width: 100%;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: var(--primary-color);
+  color: var(--text-primary);
+}
+.container h1 {
+  font-size: 4rem;
+  text-align: center;
+  margin: 2rem;
+}
+.container p {
+  text-align: center;
+  display: block;
+  max-width: 45ch;
+}
+.btnWrapper {
+  margin: 2rem;
+  gap: .6rem;
+}
+@media (max-width: 1223px) {
+  .btnWrapper {
+    flex-wrap: wrap;
+  }
+}

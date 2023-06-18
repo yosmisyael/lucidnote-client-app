@@ -1,0 +1,19 @@
+.wrapperInput {
+  background-color: var(--primary-color);
+  color: var(--text-primary);
+  margin: .6rem auto;
+}
+.wrapperIcon {
+  padding: 1rem;
+  border-right: 1px solid var(--text-primary);
+}
+.wrapperIconSpecial {
+  padding: 1rem;
+  width: 4rem;
+  cursor: pointer;
+}
+@media screen and (max-width: 1223px) {
+  .wrapper {
+    flex-wrap: wrap;
+  }
+}

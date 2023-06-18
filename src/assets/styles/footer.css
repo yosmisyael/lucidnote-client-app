@@ -1,0 +1,20 @@
+.footer {
+  background-color: var(--primary-color);
+  border-top: 2px solid var(--text-primary);
+  color: var(--text-primary);
+  padding: 4rem;
+  gap: 10rem;
+  margin: 0 1rem;
+  flex-wrap: wrap;
+}
+.gap {
+  gap: 2em;
+}
+.footer h3 {
+  font-size: 1rem;
+}
+.footer a {
+  display: flex;
+  text-decoration: none;
+  color: var(--text-primary);
+}

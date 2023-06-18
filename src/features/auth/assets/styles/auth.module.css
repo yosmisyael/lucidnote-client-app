@@ -1,0 +1,39 @@
+.container {
+  min-height: 100vh;
+  min-width: 100%;
+  font-size: 1rem;
+  gap: 1em;
+}
+.wrapper {
+  min-width: auto;
+  max-width: 40em;
+  background-color: var(--text-primary);
+  padding: 1rem 2rem;
+  margin: 0 .75em;
+  box-shadow: .5rem .5rem var(--secondary-color), 1rem 1rem var(--alternative-color);
+}
+.container h1 {
+  font-size: 3rem;
+  color: var(--primary-color);
+  text-align: left;
+}
+.wrapperFormName {
+  display: flex;
+  left: 0;
+  bottom: 100%;
+  gap: .4rem;
+}
+.wrapper .formName {
+  padding: .4rem .8rem;
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
+  cursor: pointer;
+}
+.formName.active {
+  background-color: var(--text-primary);
+}
+@media screen and (max-width: 1223px) {
+  .container {
+    flex-wrap: wrap;
+  }
+}
