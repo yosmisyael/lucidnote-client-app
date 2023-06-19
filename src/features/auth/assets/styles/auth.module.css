@@ -23,17 +23,29 @@
   bottom: 100%;
   gap: .4rem;
 }
-.wrapper .formName {
+.formName {
   padding: .4rem .8rem;
   background-color: var(--secondary-color);
   color: var(--primary-color);
   cursor: pointer;
+  font-weight: 600;
 }
 .formName.active {
   background-color: var(--text-primary);
 }
+.homeNav {
+  top: 2em;
+  left: 2em;
+  cursor: pointer;
+  gap: 1em;
+  color: var(--text-primary);
+}
+.homeNav:hover {
+  text-shadow: .1em .1em .9em var(--text-primary), -.1em -.1em .9em var(--text-primary);
+}
 @media screen and (max-width: 1223px) {
   .container {
     flex-wrap: wrap;
+    gap: 0em;
   }
 }
