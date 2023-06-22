@@ -16,7 +16,7 @@ const Button = ({ data: { buttonName, buttonType, func=undefined } }) => {
       )
     case 'icon':
       return (
-        <button className="btnIcon">{ buttonName }</button>
+        <button className="btnIcon" onClick={func}>{ buttonName }</button>
       )
     default:
       return (

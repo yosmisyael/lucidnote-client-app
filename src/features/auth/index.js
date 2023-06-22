@@ -3,15 +3,15 @@ import SignUp from './components/SignUp';
 import Logo from '../../components/Logo';
 import authStyles from './assets/styles/auth.module.css';
 import { useMediaQuery } from 'react-responsive';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { BsBox } from 'react-icons/bs';
 
 const Auth = ({ currentPath }) => {
   const bigScreen = useMediaQuery({ query: '(min-width: 1224px)'});
   const smallScreen = useMediaQuery({ query: '(max-width: 1223px)'})
-  const history = useHistory();
-  const navigate = (path) => {
-    history.push(path);
+  const navigate = useNavigate();
+  function navigatorClick (path) {
+    navigate(path)
   }
   return (
       <div className={ `${authStyles.container} flex flex-centered relative` }>
@@ -23,10 +23,10 @@ const Auth = ({ currentPath }) => {
         { bigScreen && <Logo size={'20em'} />}
         <div className={`${authStyles.wrapper} relative`}>
           <div className={ `${authStyles.wrapperFormName} absolute` }>
-            <div className={ `${authStyles.formName} ${ currentPath === '/login' ? authStyles.active : '' }`} onClick={() => navigate('/login')}>
+            <div className={ `${authStyles.formName} ${ currentPath === '/login' ? authStyles.active : '' }`} onClick={() => navigatorClick('/login')}>
               Sign In
             </div>
-            <div className={ `${authStyles.formName} ${ currentPath === '/register' ? authStyles.active : '' }`} onClick={() => navigate('/register')}>
+            <div className={ `${authStyles.formName} ${ currentPath === '/register' ? authStyles.active : '' }`} onClick={() => navigatorClick('/register')}>
               Sign Up
             </div>
           </div>

@@ -1,7 +1,7 @@
 .navbar {
   justify-content: space-between;
   width: 100%;
-  padding: 1em 3em;
+  padding: 1rem 3rem;
   background-color: var(--primary-color);
   color: var(--text-primary);
   z-index: 1;
@@ -22,17 +22,18 @@
 }
 .BsChevronDown {
   transition: all 300ms;
+  display: block;
 }
 .navbar a:hover .BsChevronDown {
   rotate: 180deg;
   transition: all 300ms;
 }
-ul {
+.navbar ul {
   list-style: none;
   display: flex;
   gap: 5em;
 }
-ul > li {
+.navbar ul > li {
   display: block;
   position: relative;
   cursor: pointer;
@@ -42,10 +43,36 @@ ul > li {
   gap: 1.3rem;
 }
 @media screen and (max-width: 1223px) {
-  ul {
+  .navbar ul {
     display: inline-block;
     position: absolute;
-    bottom: -100%;
-    background-color: var(--alternative-color);
+    top: 100%;
+    right: 0;
+    height: 100vh;
+    z-index: -2;
+    width: 100%;
+    background-color: var(--primary-color);
+    padding: 1rem;
+    transform: translateY(-100%);
+    transition: all 1000ms;
+    opacity: 0;
+  }
+  .navbar ul.active {
+    transform: translateY(0);
+    opacity: 1;
+    transition: all 1000ms;
+  }
+  .navbar ul > li {
+    padding: 3rem 0;
+    display: flex;
+    justify-content: space-between;
+  }
+  .navbar nav a {
+    width: 100%;
+    justify-content: space-between;
+    font-size: 1.4rem;
+  }
+  .navbar {
+    padding: .5rem 1.5rem;
   }
 }
