@@ -10,6 +10,7 @@
   font-size: 4rem;
   text-align: center;
   margin: 2rem;
+  z-index: 2;
 }
 .container p {
   text-align: center;
@@ -20,8 +21,49 @@
   margin: 2rem;
   gap: .6rem;
 }
+.boxBgFirst {
+  position: absolute;
+  left: 17rem;
+  font-size: 4rem;
+  animation: bounce 4s infinite;
+  opacity: .9;
+}
+.boxBgSecond {
+  position: absolute;
+  right: 13rem;
+  top: 15rem;
+  font-size: 7rem;
+  animation: bounce 5s infinite;
+  opacity: .9;
+}
+.boxBgThird {
+  top: 10rem;
+  position: absolute;
+  font-size: 4rem;
+  animation: bounce 2s infinite;
+  opacity: .9;
+}
 @media (max-width: 1223px) {
   .btnWrapper {
     flex-wrap: wrap;
+  }
+}
+@media (max-width: 800px) {
+  .boxBgSecond {
+    left: 2rem;
+  }
+  .boxBgThird {
+    right: 1.6rem;
+  }
+}
+@keyframes bounce {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
   }
 }

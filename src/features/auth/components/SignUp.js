@@ -1,6 +1,6 @@
 import FormInput from '../../../components/FormInput';
 import Button from '../../../components/Button';
-import formSignIn from '../assets/styles/formSignIn.module.css';
+import formSignIn from '../assets/styles/form.module.css';
 import { BsPerson, BsShieldLock, BsFillEyeFill, BsFillEyeSlashFill, BsEnvelope, BsShieldCheck } from 'react-icons/bs';
 import { useState } from 'react';
 
@@ -25,7 +25,7 @@ const SignIn = ({ current }) => {
         <FormInput data={{
           inputName: 'paswword',
           inputType: passVisibility ? 'text': 'password',
-          placeholder: 'create your password',
+          placeholder: 'create password',
           onChange: (isPass) => setPassword(isPass),
         }}/>
         <div className={formSignIn.wrapperIconSpecial} onClick={showPassword}>
@@ -38,7 +38,7 @@ const SignIn = ({ current }) => {
         <FormInput data={{
           inputName: 'paswwordConfirm',
           inputType: 'password',
-          placeholder: 'confirm your password',
+          placeholder: 'confirm password',
         }}/>
       </div>
       <Button data={{ buttonType: 'contrast', buttonName: 'Sign Up' }} />

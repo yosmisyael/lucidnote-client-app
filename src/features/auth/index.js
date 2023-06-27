@@ -4,7 +4,7 @@ import Logo from '../../components/Logo';
 import authStyles from './assets/styles/auth.module.css';
 import { useMediaQuery } from 'react-responsive';
 import { useNavigate } from 'react-router-dom';
-import { BsBox } from 'react-icons/bs';
+import { BsArrowLeftSquare } from 'react-icons/bs';
 
 const Auth = ({ currentPath }) => {
   const bigScreen = useMediaQuery({ query: '(min-width: 1224px)'});
@@ -16,7 +16,7 @@ const Auth = ({ currentPath }) => {
   return (
       <div className={ `${authStyles.container} flex flex-centered relative` }>
         <div className={`fixed flex flex-centered ${authStyles.homeNav}`}  onClick={() => navigate('/')}>
-          <BsBox size={30} color={'#CCD6DB'}/>
+          <BsArrowLeftSquare size={18} color={'#CCD6DB'}/>
           Back
         </div>
         { smallScreen && <Logo size={'10em'} />}
@@ -30,8 +30,8 @@ const Auth = ({ currentPath }) => {
               Sign Up
             </div>
           </div>
-              { currentPath === '/login' && <SignIn />}
-              { currentPath === '/register' && <SignUp />}
+          { currentPath === '/login' && <SignIn />}
+          { currentPath === '/register' && <SignUp />}
         </div>
       </div>
   );

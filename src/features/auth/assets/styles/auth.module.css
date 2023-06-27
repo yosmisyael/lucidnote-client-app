@@ -34,10 +34,10 @@
   background-color: var(--text-primary);
 }
 .homeNav {
-  top: 2em;
-  left: 2em;
+  top: 1em;
+  left: 1em;
   cursor: pointer;
-  gap: 1em;
+  gap: .5em;
   color: var(--text-primary);
 }
 .homeNav:hover {
@@ -46,6 +46,6 @@
 @media screen and (max-width: 1223px) {
   .container {
     flex-wrap: wrap;
-    gap: 0em;
+    gap: 0;
   }
 }

@@ -17,6 +17,7 @@ input[type=text]:focus, input[type=password]:focus, input[type=email]:focus {
 }
 .confirmCheckBox label {
   display: inline-block;
+  cursor: pointer;
 }
 .confirmCheckBox input[type=checkbox] {
   display: none;
@@ -25,15 +26,30 @@ input[type=text]:focus, input[type=password]:focus, input[type=email]:focus {
 }
 .btnToggle {
   display: flex;
-  width: 2em;
-  height: 1em;
-  background-color: var(--secondary-color);
+  position: relative;
+  width: 4.8em;
+  height: 1.6em;
+  background-color: var(--primary-color);
+  cursor: pointer;
 }
 .slider {
   display: block;
+  z-index: 3;
+  position: absolute;
   width: 50%;
   height: 100%;
-  background-color: var(--text-accent);
+  background-color: var(--text-secondary);
+  transition: all 400ms;
+}
+.sliderInfo {
+  z-index: 1;
+  display: block;
+  line-height: 1.6;
+  text-align: center;
+  width: 50%;
+  height: 100%;
+  background-color: none;
+  color: var(--text-primary);
 }
 .confirmCheckBox input[type=checkbox]:checked + label {
   color: red;
