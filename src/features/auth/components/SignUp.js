@@ -41,7 +41,9 @@ const SignIn = ({ current }) => {
           placeholder: 'confirm password',
         }}/>
       </div>
-      <Button data={{ buttonType: 'contrast', buttonName: 'Sign Up' }} />
+      <div className={formSignIn.btnWrapper}>
+        <Button data={{ buttonType: 'default', buttonName: 'Register' }} />
+      </div>
     </form>
   );
 }

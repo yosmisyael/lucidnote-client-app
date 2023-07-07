@@ -3,28 +3,47 @@ import homeStyles from '../assets/styles/home.module.css';
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
 import Button from '../components/Button';
-import { BsBox } from 'react-icons/bs';
+import homepageIcon from '../assets/icon-homepage.svg';
+import { FiTrendingUp } from 'react-icons/fi';
 
 const Home = () => {
   return (
     <React.Fragment>
       <Navbar />
-      <section className={`${homeStyles.container} flex flex-centered flex-column relative`}>
-        <BsBox className={homeStyles.boxBgFirst}/>
-        <BsBox className={homeStyles.boxBgSecond}/>
-        <BsBox className={homeStyles.boxBgThird}/>
-        <h1>Welcome to <span style={{color: 'var(--text-accent)'}}>Lucid</span>Note</h1>
-        <p>
-          QuickNote helps you easily jot down important ideas, lists, and notes. Don't let ideas slip by, keep capturing them and saving them in this app full of creativity and productivity
-        </p>
-        <div className={`${homeStyles.btnWrapper} flex flex-centered`}>
-          <Button data={{ buttonName: 'Get Started', buttonType: 'primary'}} />
-          <Button data={{ buttonName: 'Documentation', buttonType: 'default'}} />
+      <section className={`${homeStyles.canvas} relative`}>
+        <div className={homeStyles.holeContainer}>
+          <div className={homeStyles.hole}></div>
+          <div className={homeStyles.hole}></div>
+          <div className={homeStyles.hole}></div>
+          <div className={homeStyles.hole}></div>
+          <div className={homeStyles.hole}></div>
+          <div className={homeStyles.hole}></div>
+          <div className={homeStyles.hole}></div>
+          <div className={homeStyles.hole}></div>
+          <div className={homeStyles.hole}></div>
+          <div className={homeStyles.hole}></div>
+          <div className={homeStyles.hole}></div>
+          <div className={homeStyles.hole}></div>
+          <div className={homeStyles.hole}></div>
+          <div className={homeStyles.hole}></div>
+          <div className={homeStyles.hole}></div>
+          <div className={homeStyles.hole}></div>
+          <div className={homeStyles.hole}></div>
         </div>
-      </section>
-      <section>
-        <div className={`flex ${homeStyles.container}`}>
-          Hallos
+        <div className={homeStyles.lineContainer}>
+          <div className={homeStyles.line}></div>
+        </div>
+        <div className={homeStyles.col1}>
+          <h1><u>Capture</u>, <u>Organize</u>, and <u>Unleash</u> Your Ideas!</h1>
+          <p>
+            Keep capturing your ideas with this app full of creativity and productivity <FiTrendingUp />
+          </p>
+          <div className={`${homeStyles.btnWrapper} flex flex-centered`}>
+            <Button data={{ buttonName: 'Get Started', buttonType: 'primary'}} />
+          </div>
+        </div>
+        <div className={homeStyles.col2}>
+          <img src={homepageIcon} height={'600rem'} alt="" />
         </div>
       </section>
       <Footer />

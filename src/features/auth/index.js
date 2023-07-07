@@ -2,36 +2,34 @@ import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
 import Logo from '../../components/Logo';
 import authStyles from './assets/styles/auth.module.css';
-import { useMediaQuery } from 'react-responsive';
 import { useNavigate } from 'react-router-dom';
-import { BsArrowLeftSquare } from 'react-icons/bs';
+import { useState } from 'react';
+import { CgArrowsExchangeAltV } from 'react-icons/cg'
 
 const Auth = ({ currentPath }) => {
-  const bigScreen = useMediaQuery({ query: '(min-width: 1224px)'});
-  const smallScreen = useMediaQuery({ query: '(max-width: 1223px)'})
-  const navigate = useNavigate();
-  function navigatorClick (path) {
-    navigate(path)
+  const [isFlipped, setFlipped] = useState(false)
+  const handleFlip = () => {
+    setFlipped(!isFlipped)
   }
+  const navigate = useNavigate();
   return (
       <div className={ `${authStyles.container} flex flex-centered relative` }>
-        <div className={`fixed flex flex-centered ${authStyles.homeNav}`}  onClick={() => navigate('/')}>
-          <BsArrowLeftSquare size={18} color={'#CCD6DB'}/>
-          Back
+        <div className={`fixed flex ${authStyles.navbar}`}  onClick={() => navigate('/')}>
+          <Logo size={'3rem'}/>          
         </div>
-        { smallScreen && <Logo size={'10em'} />}
-        { bigScreen && <Logo size={'20em'} />}
-        <div className={`${authStyles.wrapper} relative`}>
-          <div className={ `${authStyles.wrapperFormName} absolute` }>
-            <div className={ `${authStyles.formName} ${ currentPath === '/login' ? authStyles.active : '' }`} onClick={() => navigatorClick('/login')}>
-              Sign In
+        <div className={authStyles.cardWrapper}>
+          <div className={`${authStyles.card} ${ isFlipped ? authStyles.flipped : ''}`}>
+            <div className={authStyles.frontSide}>
+              <h1>Login</h1>
+              <SignIn />
+              <button onClick={handleFlip}> change it here </button>
             </div>
-            <div className={ `${authStyles.formName} ${ currentPath === '/register' ? authStyles.active : '' }`} onClick={() => navigatorClick('/register')}>
-              Sign Up
+            <div className={authStyles.backSide}>
+              <h1>Register</h1>
+              <SignUp />
+              <button className={authStyles.swipe} onClick={handleFlip}> <CgArrowsExchangeAltV size={30} style={{transform: 'rotate(45deg)'}}/>Login </button>
             </div>
           </div>
-          { currentPath === '/login' && <SignIn />}
-          { currentPath === '/register' && <SignUp />}
         </div>
       </div>
   );

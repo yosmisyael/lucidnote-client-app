@@ -4,7 +4,7 @@
   color: var(--text-primary);
   padding: 4rem;
   gap: 10rem;
-  margin: 0 1rem;
+  margin: 1rem 1rem;
   flex-wrap: wrap;
 }
 .gap {

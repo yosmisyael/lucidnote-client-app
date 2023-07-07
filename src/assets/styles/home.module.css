@@ -5,56 +5,98 @@
   padding: 2rem;
   background-color: var(--primary-color);
   color: var(--text-primary);
+  position: relative;
+  overflow: hidden;
 }
-.container h1 {
+.canvas {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  margin: auto;
+  padding: 4rem 2rem 0 2rem;
+  background-color: var(--primary-color);
+  color: var(--text-primary);
+  position: relative;
+  overflow: hidden;
+}
+.canvas h1 {
   font-size: 4rem;
-  text-align: center;
+  font-weight: 700;
   margin: 2rem;
-  z-index: 2;
 }
-.container p {
-  text-align: center;
+.canvas p {
+  text-align: left;
   display: block;
   max-width: 45ch;
+  margin-left: 2rem;
+  font-size: 1.3rem;
+  font-weight: 500;
+}
+.canvas .col1 {
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  flex-direction: column;
+  z-index: 1;
+}
+.canvas .col2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .btnWrapper {
   margin: 2rem;
   gap: .6rem;
 }
-.boxBgFirst {
+.holeContainer {
+  display: flex;
+  padding: .5rem;
+  flex-direction: column;
+  min-height: 100vh;
   position: absolute;
-  left: 17rem;
-  font-size: 4rem;
-  animation: bounce 4s infinite;
-  opacity: .9;
+  left: 0;
+  margin-left: 1rem;
+  gap: 3rem;
 }
-.boxBgSecond {
+.hole {
+  width: 1rem;
+  height: 1rem;
+  background-color: var(--text-primary);
+}
+.lineContainer {
+  min-height: 100vh;
+  width: 100%;
   position: absolute;
-  right: 13rem;
-  top: 15rem;
-  font-size: 7rem;
-  animation: bounce 5s infinite;
-  opacity: .9;
+  opacity: .4;
 }
-.boxBgThird {
-  top: 10rem;
-  position: absolute;
-  font-size: 4rem;
-  animation: bounce 2s infinite;
-  opacity: .9;
+.line { 
+  height: 50rem;
+  background: linear-gradient(to bottom, transparent 10px, var(--text-primary) 5px, var(--text-primary) 6px, transparent 10px),
+              linear-gradient(to bottom, transparent calc(100% - 6px), var(--text-primary) calc(100% - 6px), var(--text-primary) calc(100% - 5px), transparent calc(100% - 5px));
+  background-size: 100% 5rem;
+  background-repeat: repeat-y;
+  background-position: top;
+  border-bottom: 1px solid var(--text-primary);
 }
-@media (max-width: 1223px) {
-  .btnWrapper {
+@media (max-width: 1024px) {
+  .canvas {
     flex-wrap: wrap;
   }
-}
-@media (max-width: 800px) {
-  .boxBgSecond {
-    left: 2rem;
+  .canvas h1 {
+    font-size: 2.7rem;
+    text-align: center;
   }
-  .boxBgThird {
-    right: 1.6rem;
+  .canvas p {
+    font-size: 1.4rem;
+    text-align: center;
   }
+  .canvas .col1 {
+    align-items: center;
+  }
+  .canvas .col2 img {
+    height: 21rem;
+  }
+
 }
 @keyframes bounce {
   0% {

@@ -18,7 +18,7 @@ const Navbar = () => {
   const smallScreen = useMediaQuery({query: "(max-width: 1223px)"});
   if (smallScreen) return (
     <header className={`${navbar.navbar} fixed flex flex-space-between`}>
-      <a href="/"><Logo size={'4em'} /></a>
+      <a href="/"><Logo size={'3em'} /></a>
       <nav>
         <ul className={menu ? navbar.active : ""}>
           <li><Link>Why LucidNote</Link></li>
@@ -44,7 +44,7 @@ const Navbar = () => {
   )
   if (bigScreen) return (
     <header className={`${navbar.navbar} fixed flex flex-space-between`}>
-      <a href="/"><Logo size={'4em'} /></a>
+      <a href="/"><Logo size={'3em'} /></a>
       <nav>
         <ul>
           <li><Link>Why LucidNote</Link></li>

@@ -1,5 +1,4 @@
 import FormInput from '../../../components/FormInput';
-import FormCheckBox from '../../../components/FormCheckBox';
 import Button from '../../../components/Button';
 import formSignIn from '../assets/styles/form.module.css';
 import { BsPerson, BsShieldLock, BsFillEyeFill, BsFillEyeSlashFill } from 'react-icons/bs';
@@ -30,8 +29,15 @@ const SignIn = () => {
           { password && passVisibility && <BsFillEyeSlashFill size={20}/> }
         </div>
       </div>
-      <FormCheckBox data={{ inputName:'isCookie', content: 'Remember me for the next 30 days' }} />
-      <Button data={{ buttonType: 'contrast', buttonName: 'Login' }} />
+      <div >
+        <input type="checkbox" id='isCookie' className={formSignIn.checkBox} /> 
+        <label for='isCookie'>
+          Remember me
+        </label> 
+      </div>
+      <div className={formSignIn.btnWrapper}>
+        <Button data={{ buttonType: 'default', buttonName: 'Login' }} />
+      </div>
     </form>
   );
 }

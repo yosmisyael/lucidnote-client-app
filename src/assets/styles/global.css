@@ -1,12 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;400;600&family=Raleway&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;500;600;700&family=Raleway&display=swap');
 
 :root {
-  --primary-color: #16171A;
-  --secondary-color: #2B2C2F;
+  --primary-color:  #fff;
+  --secondary-color:  #ccc;
   --accent-color: #35383B;
-  --alternative-color: #1F2225;
-  --text-primary: #CCD6DB;
-  --text-secondary: #989DA1;
+  --alternative-color: #F7F7F7;
+  --text-primary: #16171A;
+  --text-secondary: #2B2C2F;
   --text-accent: #275774;
 }
 

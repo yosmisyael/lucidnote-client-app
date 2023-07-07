@@ -4,13 +4,28 @@
   margin: .6rem auto;
 }
 .wrapperIcon {
-  padding: 1rem;
+  padding: .5rem;
   border-right: 1px solid var(--text-primary);
 }
 .wrapperIconSpecial {
-  padding: 1rem;
+  padding: .5rem;
   width: 4rem;
   cursor: pointer;
+}
+.btnWrapper {
+  margin-top: .6rem;
+  width: 100%;
+}
+.btnWrapper button, span {
+  width: 100%;
+}
+.checkBox {
+  accent-color: var(--text-primary);
+  display: inline-block;
+}
+form label {
+  display: inline-block;
+  margin-left: .4rem;
 }
 @media screen and (max-width: 1223px) {
   .wrapper {

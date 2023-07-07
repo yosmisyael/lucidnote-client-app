@@ -10,20 +10,6 @@ input[type=text], input[type=password], input[type=email] {
 input[type=text]:focus, input[type=password]:focus, input[type=email]:focus {
   outline: none;
 }
-.confirmCheckBox {
-  display: inline-flex;
-  gap: .6rem;
-  align-items: center;
-}
-.confirmCheckBox label {
-  display: inline-block;
-  cursor: pointer;
-}
-.confirmCheckBox input[type=checkbox] {
-  display: none;
-  width: 1rem;
-  height: 1rem;
-}
 .btnToggle {
   display: flex;
   position: relative;
@@ -51,11 +37,9 @@ input[type=text]:focus, input[type=password]:focus, input[type=email]:focus {
   background-color: none;
   color: var(--text-primary);
 }
-.confirmCheckBox input[type=checkbox]:checked + label {
-  color: red;
-}
-.confirmCheckBox input[type=checkbox]:checked + label .btnToggle {
-  background-color: red;  
+input[type=checkbox] {
+  width: 1rem;
+  accent-color: var(--primary-color);
 }
 label {
   display: block;
