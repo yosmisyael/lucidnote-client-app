@@ -29,14 +29,14 @@ const SignIn = () => {
           { password && passVisibility && <BsFillEyeSlashFill size={20}/> }
         </div>
       </div>
-      <div >
-        <input type="checkbox" id='isCookie' className={formSignIn.checkBox} /> 
-        <label for='isCookie'>
-          Remember me
-        </label> 
-      </div>
       <div className={formSignIn.btnWrapper}>
         <Button data={{ buttonType: 'default', buttonName: 'Login' }} />
+      </div>
+      <div className={formSignIn.wrapper}>
+        <input type="checkbox" id='isCookie' className={formSignIn.checkBox} /> 
+        <label htmlFor='isCookie'>
+          Remember me for 30 days
+        </label> 
       </div>
     </form>
   );

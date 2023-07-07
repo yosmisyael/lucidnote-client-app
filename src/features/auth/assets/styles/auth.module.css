@@ -15,8 +15,8 @@
   padding: .6rem 3.5rem;
 }
 .container .cardWrapper {
-  height: 22rem;
-  width: 30rem;
+  min-height: 27rem;
+  width: 25rem;
   position: relative;
   margin: 1rem;
 }
@@ -34,11 +34,29 @@
   transform: rotateX(180deg);
 }
 .swipe {
+  position: absolute;
+  right: 100%;
+  border: 1px solid var(--text-primary);
+  border-right: none;
+  width: 2rem;
   cursor: pointer;
   color: var(--text-primary);
 }
 .container .cardWrapper .card h1 {
   text-align: center;
+}
+.container .cardWrapper .card p {
+  text-align: center;
+  font-size: .75rem;
+  padding: .9rem;
+}
+.container .cardWrapper .card a {
+  text-decoration: none;
+  color: var(--text-primary);
+  font-weight: 700;
+}
+.container .cardWrapper .card a:hover {
+  text-shadow: none;
 }
 .container .cardWrapper .card .frontSide {
   padding: 1rem;

@@ -19,6 +19,9 @@
 .btnWrapper button, span {
   width: 100%;
 }
+.btnWrapper button {
+  margin-top: 1.5rem;
+}
 .checkBox {
   accent-color: var(--text-primary);
   display: inline-block;

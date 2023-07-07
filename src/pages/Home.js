@@ -4,7 +4,7 @@ import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
 import Button from '../components/Button';
 import homepageIcon from '../assets/icon-homepage.svg';
-import { FiTrendingUp } from 'react-icons/fi';
+import { FcIdea, FcBullish } from 'react-icons/fc';
 
 const Home = () => {
   return (
@@ -36,7 +36,7 @@ const Home = () => {
         <div className={homeStyles.col1}>
           <h1><u>Capture</u>, <u>Organize</u>, and <u>Unleash</u> Your Ideas!</h1>
           <p>
-            Keep capturing your ideas with this app full of creativity and productivity <FiTrendingUp />
+            Keep capturing your ideas with this app full of creativity <FcIdea /> and productivity <FcBullish />
           </p>
           <div className={`${homeStyles.btnWrapper} flex flex-centered`}>
             <Button data={{ buttonName: 'Get Started', buttonType: 'primary'}} />
