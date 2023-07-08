@@ -19,7 +19,7 @@ const TagModal = ({ triggerModal }) => {
         </div>
         <div className={modal.footer}>
           <Button data={{buttonName: 'cancel', buttonType: 'default', func: triggerModal}} />
-          <Button data={{buttonName: 'submit', buttonType: 'primary'}} />
+          <Button data={{buttonName: 'apply', buttonType: 'primary'}} />
         </div>
       </div>
   );

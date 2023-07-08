@@ -1,31 +1,44 @@
 import { useNavigate } from 'react-router-dom';
-import FormInput from '../components/FormInput'
+import { useState } from 'react';
+import { useMediaQuery } from 'react-responsive';
+import FormInput from '../components/FormInput';
 import Card from 'src/components/Card';
 import notes from '../assets/styles/notes.module.css';
 import TagModal from 'src/components/Modals';
-import { MdNoteAdd, MdOutlineArrowBackIos, MdFilterListAlt } from 'react-icons/md'
-import { useState } from 'react';
+import { MdNoteAdd, MdOutlineArrowForwardIos, MdFilterListAlt, MdOutlineClose, MdSearch } from 'react-icons/md'
 
 const Notes = () => {
+  const mobile = useMediaQuery({ query: '(max-width: 768px)' })
   const navigate = useNavigate()
   const [modal, setModal] = useState(false)
+  const [searchBar, setSearchBar] = useState(false)
   const triggerModal = () => {
     setModal(!modal)
   }
+  const triggerSearch = () => {
+    setSearchBar(!searchBar)
+  } 
   return (
     <section className={notes.container}>
       { modal && <div className={notes.shadow}></div> }
       <div className={notes.navbar}>
-        <div className={notes.navigate} onClick={() => navigate('/user')}>
-          <MdOutlineArrowBackIos /> <span style={{marginLeft: '.5rem'}}>Dashboard</span>
-        </div>
+        { !mobile && <div className={notes.navigate}>
+          <span onClick={() => navigate('/user')}>Dashboard</span> <MdOutlineArrowForwardIos size={24} /> <span>All Notes</span>
+        </div> }
+        { mobile ? 
+        (!searchBar && (<div className={notes.navigate}>
+          <span onClick={() => navigate('/user')}>Dashboard</span> <MdOutlineArrowForwardIos size={24} /> <span>All Notes</span>
+        </div>)) : null 
+        }
         <div className={notes.searchBar}>
-          <FormInput data={{
+          { searchBar &&  <FormInput data={{
             inputName: 'keyword',
             inputType: 'text',
             placeholder: 'search notes by title here ...'
-          }} />
-          <button onClick={triggerModal}><MdFilterListAlt size={24}/></button>
+          }} /> }
+          { searchBar && <button onClick={triggerSearch}><MdOutlineClose size={24} /> </button> }
+          { !searchBar && <button onClick={triggerSearch}><MdSearch size={24} /> </button> }
+          <button onClick={triggerModal}><MdFilterListAlt size={24} /></button>
         </div>
       </div>
       <div className={notes.sideBar}>
@@ -41,7 +54,7 @@ const Notes = () => {
         <Card />
         <Card />
       </div>
-      <div className={notes.buttonNav}>
+      <div className={notes.buttonNav} onClick={() => navigate('/user/notes/add')}>
         <MdNoteAdd size={20}/> Add new note
       </div>
     </section>

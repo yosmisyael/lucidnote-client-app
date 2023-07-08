@@ -27,12 +27,12 @@ const Dashboard = () => {
         <div style={{cursor: 'pointer'}} onClick={() => navigate('/')}>
           <Logo size={'3rem'}/>          
         </div>
-        <div>
+        <div className={dashboard.text}>
           <h3>Good {getTime()}, Name! </h3>
         </div>
-        <div>
-          <Button data={{buttonName: 'Logout', buttonType: 'primary'}}/>
-        </div>
+        {/* <div>
+          <Button data={{buttonName: 'Logout', buttonType: 'default'}}/>
+        </div> */}
       </div>
       <div className={dashboard.wrapper}>
         <div className={dashboard.feature} onClick={() => navigate('/user/notes')}>

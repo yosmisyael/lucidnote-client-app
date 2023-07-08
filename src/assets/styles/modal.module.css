@@ -6,7 +6,7 @@
   transform: translate(-50%, -50%);
   padding: 1rem;
   background-color: var(--primary-color);
-  min-width: 25rem;
+  min-width: 20rem;
   border: 1px solid var(--text-primary);
   /* border-radius: .6rem; */
   /* box-shadow: 0.1rem .1rem .2rem var(--secondary-color), -.1rem -.1rem .2rem var(--secondary-color); */

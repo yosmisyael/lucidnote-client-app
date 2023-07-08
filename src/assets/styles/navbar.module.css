@@ -19,9 +19,9 @@
   padding: .5rem;
   border-radius: .4rem;
 }
-.navbar a:hover {
+.navbar nav a:hover {
   transition: all 100ms;
-  background-color: var(--alternative-color);
+  background-color: var(--secondary-color);
 }
 .BsChevronDown {
   transition: all 100ms;

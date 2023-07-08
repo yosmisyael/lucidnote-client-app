@@ -22,7 +22,7 @@ const Navbar = () => {
       <nav>
         <ul className={menu ? navbar.active : ""}>
           <li><Link>Why LucidNote</Link></li>
-          <li><Link className="flex-centered">Features <BsChevronDown className={ `${navbar.BsChevronDown}` } /></Link></li>
+          <li><Link className="flex-centered">Features <BsChevronDown className={ navbar.BsChevronDown } /></Link></li>
           <li><Link>Source</Link></li>
           <Button data={{ buttonName: 'Login', buttonType: 'primary', func: () => navigatorClick('/login') }} />  
         </ul>
@@ -48,7 +48,7 @@ const Navbar = () => {
       <nav>
         <ul>
           <li><Link>Why LucidNote</Link></li>
-          <li><Link className="flex-centered">Features <BsChevronDown className={ `${navbar.BsChevronDown}` } /></Link></li>
+          <li><Link className="flex-centered">Features <BsChevronDown className={ navbar.BsChevronDown } /></Link></li>
           <li><Link>Source</Link></li>
         </ul>
       </nav>
