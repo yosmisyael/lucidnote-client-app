@@ -1,0 +1,116 @@
+/* .container * {
+  border: 1px solid red;
+} */
+
+.container {
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+}
+
+.container .navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--primary-color);
+  box-shadow: 0 .1rem .2rem var(--secondary-color);
+  padding: .6rem 3.5rem;
+  z-index: 2;
+}
+.container .navbar .searchBar {
+  display: flex;
+}
+.container .navbar button {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+.container .navbar .navigate {
+  display: flex;
+  align-items: center;
+  background-origin: var(--secondary-color);
+}
+.container .navbar .navigate:hover {
+  cursor: pointer;
+}
+
+.container .buttonNav {
+  position: fixed;
+  display: flex;
+  gap: .5rem;
+  cursor: pointer;
+  align-items: center;
+  bottom: 1rem;
+  padding: .5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--text-primary);
+  color: var(--primary-color);
+}
+
+.container .sideBar {
+  position: absolute;
+  display: flex;
+  min-height: 100vh;
+  width: 15rem;
+  left: -100%;
+  z-index: 1;
+  background-color: var(--primary-color);
+}
+
+.container .noteWrapper {
+  position: relative;
+  padding: 5rem 1rem 0 1rem;
+  width: 100%;
+  display: flex;
+  gap: 1rem;
+}
+
+.container .noteWrapper .card {
+  max-width: 16rem;
+  border-top: .3rem solid var(--text-primary);
+  padding: .5rem 1rem 1rem 1rem;
+  box-shadow: .2rem .2rem .2rem var(--secondary-color);
+}
+.container .noteWrapper .card .cardHeader h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  padding: .25rem 0 .75rem 0;
+}
+.container .noteWrapper .card .cardHeader h2 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--secondary-color);
+}
+/* tag */
+.tagsContainer {
+  display: flex;
+  gap: .5rem;
+  padding-bottom: 1rem;
+}
+.tag {
+  display: flex;
+  gap: .5rem;
+  background-color: var(--secondary-color);
+  padding: .1rem .2rem;
+  margin-bottom: 1rem;
+}
+
+.container .noteWrapper .card .cardBody {
+  font-size: 1rem;
+  font-weight: 600;
+}
+.container .noteWrapper .card .cardFooter {
+  margin-top: 1.5rem;
+  font-size: .75rem;
+  font-weight: 600;
+}
+
+@media screen and (max-width: 1024px) {
+  .container .navbar {
+    padding: .6rem 2rem;
+  }
+}

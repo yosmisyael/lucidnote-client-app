@@ -36,7 +36,7 @@ const Home = () => {
         <div className={homeStyles.col1}>
           <h1><u>Capture</u>, <u>Organize</u>, and <u>Unleash</u> Your Ideas!</h1>
           <p>
-            Keep capturing your ideas with this app full of creativity <FcIdea /> and productivity <FcBullish />
+            Keep capturing your ideas with this app full of creativity<FcIdea /> and productivity<FcBullish />
           </p>
           <div className={`${homeStyles.btnWrapper} flex flex-centered`}>
             <Button data={{ buttonName: 'Get Started', buttonType: 'primary'}} />
