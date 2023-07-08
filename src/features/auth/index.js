@@ -1,24 +1,24 @@
 import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
 import Logo from '../../components/Logo';
-import authStyles from './assets/styles/auth.module.css';
+import auth from './assets/styles/auth.module.css';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
-const Auth = ({ currentPath }) => {
+const Auth = () => {
   const [isFlipped, setFlipped] = useState(false)
   const handleFlip = () => {
     setFlipped(!isFlipped)
   }
   const navigate = useNavigate();
   return (
-      <div className={ `${authStyles.container} flex flex-centered relative` }>
-        <div className={`fixed flex ${authStyles.navbar}`}  onClick={() => navigate('/')}>
+      <div className={ `${auth.container} flex flex-centered relative` }>
+        <div className={`fixed flex ${auth.navbar}`}  onClick={() => navigate('/')}>
           <Logo size={'3rem'}/>          
         </div>
-        <div className={authStyles.cardWrapper}>
-          <div className={`${authStyles.card} ${ isFlipped ? authStyles.flipped : ''}`}>
-            <div className={authStyles.frontSide}>
+        <div className={auth.cardWrapper}>
+          <div className={`${auth.card} ${ isFlipped ? auth.flipped : ''}`}>
+            <div className={auth.frontSide}>
               <h1>Login</h1>
               <SignIn />
               <p>
@@ -28,7 +28,7 @@ const Auth = ({ currentPath }) => {
                <span style={{fontWeight: '700', cursor: 'pointer'}} onClick={handleFlip} >Create account</span>  
               </p>
             </div>
-            <div className={authStyles.backSide}>
+            <div className={auth.backSide}>
               <h1>Register</h1>
               <SignUp />
               <p>
