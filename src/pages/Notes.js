@@ -1,13 +1,20 @@
-import notes from '../assets/styles/notes.module.css';
-import { MdNoteAdd, MdOutlineArrowBackIos, MdFilterListAlt } from 'react-icons/md'
+import { useNavigate } from 'react-router-dom';
 import FormInput from '../components/FormInput'
 import Card from 'src/components/Card';
-import { useNavigate } from 'react-router-dom';
+import notes from '../assets/styles/notes.module.css';
+import TagModal from 'src/components/Modals';
+import { MdNoteAdd, MdOutlineArrowBackIos, MdFilterListAlt } from 'react-icons/md'
+import { useState } from 'react';
 
 const Notes = () => {
   const navigate = useNavigate()
+  const [modal, setModal] = useState(false)
+  const triggerModal = () => {
+    setModal(!modal)
+  }
   return (
     <section className={notes.container}>
+      { modal && <div className={notes.shadow}></div> }
       <div className={notes.navbar}>
         <div className={notes.navigate} onClick={() => navigate('/user')}>
           <MdOutlineArrowBackIos /> <span style={{marginLeft: '.5rem'}}>Dashboard</span>
@@ -18,7 +25,7 @@ const Notes = () => {
             inputType: 'text',
             placeholder: 'search notes by title here ...'
           }} />
-          <button><MdFilterListAlt size={24}/></button>
+          <button onClick={triggerModal}><MdFilterListAlt size={24}/></button>
         </div>
       </div>
       <div className={notes.sideBar}>
@@ -29,8 +36,8 @@ const Notes = () => {
           <li>Settings</li>
         </ul>
       </div>
+        { modal && <TagModal triggerModal={triggerModal} /> }
       <div className={notes.noteWrapper}>
-        <Card />
         <Card />
         <Card />
       </div>

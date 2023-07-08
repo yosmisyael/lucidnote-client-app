@@ -3,6 +3,13 @@
   border-top: .3rem solid var(--text-primary);
   padding: .5rem 1rem 1rem 1rem;
   box-shadow: .2rem .2rem .2rem var(--secondary-color);
+  transition: all 100ms;
+}
+.card:hover {
+  cursor: pointer;
+  transform: translate(-2px, -2px);
+  box-shadow: .4rem .4rem .2rem var(--secondary-color);
+  transition: all 100ms;
 }
 .card .cardHeader h1 {
   font-size: 1.75rem;
@@ -12,7 +19,7 @@
 .card .cardHeader h2 {
   font-size: 1.2rem;
   font-weight: 700;
-  color: var(--secondary-color);
+  color: var(--alternative-color);
 }
 /* tag */
 .tagsContainer {

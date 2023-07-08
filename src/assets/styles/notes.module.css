@@ -68,6 +68,14 @@
   display: flex;
   gap: 1rem;
 }
+.container .shadow {
+  min-height: 100vh;
+  width: 100%;
+  background-color: var(--text-primary);
+  position: fixed;
+  z-index: 1;
+  opacity: .4;
+}
 
 @media screen and (max-width: 1024px) {
   .container .navbar {
