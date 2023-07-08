@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
-import FormInput from '../components/FormInput';
+import { Input } from '../components/FormComponent';
 import Card from 'src/components/Card';
 import notes from '../assets/styles/notes.module.css';
 import TagModal from 'src/components/Modals';
@@ -31,7 +31,7 @@ const Notes = () => {
         </div>)) : null 
         }
         <div className={notes.searchBar}>
-          { searchBar &&  <FormInput data={{
+          { searchBar &&  <Input data={{
             inputName: 'keyword',
             inputType: 'text',
             placeholder: 'search notes by title here ...'

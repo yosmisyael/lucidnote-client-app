@@ -1,6 +1,6 @@
-import FormInput from '../../../components/FormInput';
+import { Input } from '../../../components/FormComponent';
 import Button from '../../../components/Button';
-import formSignIn from '../assets/styles/form.module.css';
+import formSignIn from '../assets/form.module.css';
 import { BsPerson, BsShieldLock, BsFillEyeFill, BsFillEyeSlashFill, BsEnvelope, BsShieldCheck } from 'react-icons/bs';
 import { useState } from 'react';
 
@@ -14,15 +14,15 @@ const SignIn = ({ current }) => {
     <form action="" method="post">
       <div className={`${formSignIn.wrapperInput} flex flex-centered`}>
         <div className={formSignIn.wrapperIcon}><BsEnvelope size={20}/></div>
-        <FormInput data={{ inputName: 'email', inputType: 'email', placeholder: 'email' }}/>
+        <Input data={{ inputName: 'email', inputType: 'email', placeholder: 'email' }}/>
       </div>
       <div className={`${formSignIn.wrapperInput} flex flex-centered`}>
         <div className={formSignIn.wrapperIcon}><BsPerson size={20}/></div>
-        <FormInput data={{ inputName: 'username', inputType: 'text', placeholder:'username' }}/>
+        <Input data={{ inputName: 'username', inputType: 'text', placeholder:'username' }}/>
       </div>
       <div className={`${formSignIn.wrapperInput} flex flex-centered`}>
         <div className={ formSignIn.wrapperIcon }><BsShieldLock size={20}/></div>
-        <FormInput data={{
+        <Input data={{
           inputName: 'paswword',
           inputType: passVisibility ? 'text': 'password',
           placeholder: 'create password',
@@ -35,7 +35,7 @@ const SignIn = ({ current }) => {
       </div>
       <div className={`${formSignIn.wrapperInput} flex flex-centered`}>
         <div className={ formSignIn.wrapperIcon }><BsShieldCheck size={20}/></div>
-        <FormInput data={{
+        <Input data={{
           inputName: 'paswwordConfirm',
           inputType: 'password',
           placeholder: 'confirm password',

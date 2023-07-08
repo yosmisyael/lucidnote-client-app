@@ -1,7 +1,7 @@
 import React from "react";
-import '../assets/styles/form.module.css';
+import '../assets/styles/formComponent.module.css';
 
-const Form = ({ data: { inputName, inputType, placeholder=undefined, onChange=undefined } }) => {
+const Input = ({ data: { inputName, inputType, placeholder=undefined, onChange=undefined } }) => {
   const changeHandler = (e) => {
     if (onChange) {
       onChange(e.target.value)
@@ -13,5 +13,5 @@ const Form = ({ data: { inputName, inputType, placeholder=undefined, onChange=un
     </React.Fragment>
   );
 }
- 
-export default Form;
+
+export { Input }

@@ -2,7 +2,7 @@ import Home from './pages/Home';
 import UserAuthentication from './pages/UserAuthentication';
 import Notes from './pages/Notes';
 import Dashboard from './pages/Dashboard';
-import CreateNotes from './pages/CreateNotes';
+import CreateNotes from './features/note/index';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {

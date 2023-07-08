@@ -1,6 +1,6 @@
-import FormInput from '../../../components/FormInput';
+import { Input } from '../../../components/FormComponent';
 import Button from '../../../components/Button';
-import formSignIn from '../assets/styles/form.module.css';
+import formSignIn from '../assets/form.module.css';
 import { BsPerson, BsShieldLock, BsFillEyeFill, BsFillEyeSlashFill } from 'react-icons/bs';
 import { useState } from 'react';
 
@@ -14,11 +14,11 @@ const SignIn = () => {
     <form action="" method="post">
       <div className={`${formSignIn.wrapperInput} flex flex-centered`}>
         <div className={formSignIn.wrapperIcon}><BsPerson size={20}/></div>
-        <FormInput data={{ inputName: 'username', inputType: 'text', placeholder:'username' }}/>
+        <Input data={{ inputName: 'username', inputType: 'text', placeholder:'username' }}/>
       </div>
       <div className={`${formSignIn.wrapperInput} flex flex-centered`}>
         <div className={ formSignIn.wrapperIcon }><BsShieldLock size={20}/></div>
-        <FormInput data={{
+        <Input data={{
           inputName: 'paswword',
           inputType: passVisibility ? 'text': 'password',
           placeholder: 'password',

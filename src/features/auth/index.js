@@ -1,7 +1,7 @@
 import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
 import Logo from '../../components/Logo';
-import auth from './assets/styles/auth.module.css';
+import auth from './assets/auth.module.css';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
