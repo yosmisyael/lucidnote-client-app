@@ -16,7 +16,10 @@
   margin-top: .6rem;
   width: 100%;
 }
-.btnWrapper button, span {
+form .btnWrapper button {
+  width: 100%;
+}
+form .btnWrapper span {
   width: 100%;
 }
 .btnWrapper button {

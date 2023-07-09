@@ -1,5 +1,5 @@
 import Logo from 'src/components/Logo';
-import Button from 'src/components/Button';
+// import Button from 'src/components/Button';
 import dashboard from '../assets/styles/dashboard.module.css';
 import { useNavigate } from 'react-router-dom';
 import { TfiAgenda } from 'react-icons/tfi';

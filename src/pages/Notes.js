@@ -23,11 +23,11 @@ const Notes = () => {
       { modal && <div className={notes.shadow}></div> }
       <div className={notes.navbar}>
         { !mobile && <div className={notes.navigate}>
-          <span onClick={() => navigate('/user')}>Dashboard</span> <MdOutlineArrowForwardIos size={24} /> <span>All Notes</span>
+          <span onClick={() => navigate('/user')}>Dashboard</span> <MdOutlineArrowForwardIos size={12} /> <span>All Notes</span>
         </div> }
         { mobile ? 
         (!searchBar && (<div className={notes.navigate}>
-          <span onClick={() => navigate('/user')}>Dashboard</span> <MdOutlineArrowForwardIos size={24} /> <span>All Notes</span>
+          <span onClick={() => navigate('/user')}>Dashboard</span> <MdOutlineArrowForwardIos size={12} /> <span>All Notes</span>
         </div>)) : null 
         }
         <div className={notes.searchBar}>

@@ -4,7 +4,7 @@ import formSignIn from '../assets/form.module.css';
 import { BsPerson, BsShieldLock, BsFillEyeFill, BsFillEyeSlashFill, BsEnvelope, BsShieldCheck } from 'react-icons/bs';
 import { useState } from 'react';
 
-const SignIn = ({ current }) => {
+const SignIn = () => {
   const [passVisibility, setPassVisibility] = useState(false);
   const showPassword = () => {
     setPassVisibility(current => !current); 
