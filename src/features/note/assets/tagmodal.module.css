@@ -1,4 +1,4 @@
-.filterDialog {
+.tagDialog {
   z-index: 2;
   position: fixed;
   left: 50%;
@@ -9,20 +9,20 @@
   min-width: 20rem;
   border: 1px solid var(--text-primary);
 }
-.filterDialog .body {
+.tagDialog .body {
   display: flex;
   gap: 1rem;
 }
-.filterDialog .body .checkboxWrapper {
+.tagDialog .body .tagItem {
   display: flex;
   align-items: center;
   gap: .5rem;
 }
-.filterDialog input, label {
+.tagDialog input, label {
   display: block;
   font-size: 1rem;  
 }
-.filterDialog .footer {
+.tagDialog .footer {
   display: flex;
   gap: 1rem;
   justify-content: end;
