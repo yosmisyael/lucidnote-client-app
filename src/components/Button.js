@@ -1,6 +1,6 @@
 import '../assets/styles/utils.css';
 
-const Button = ({ data: { buttonName, buttonType, func=undefined } }) => {
+const Button = ({ buttonName, buttonType, func=undefined }) => {
   switch (buttonType) {
     case 'default':
       return (

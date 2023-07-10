@@ -23,19 +23,15 @@ const Notes = () => {
       { modal && <div className={notes.shadow}></div> }
       <div className={notes.navbar}>
         { !mobile && <div className={notes.navigate}>
-          <span onClick={() => navigate('/user')}>Dashboard</span> <MdOutlineArrowForwardIos size={12} /> <span>All Notes</span>
+          <span onClick={() => navigate('/user')}>Dashboard</span> <MdOutlineArrowForwardIos size={12} /> <span>Notes</span>
         </div> }
         { mobile ? 
         (!searchBar && (<div className={notes.navigate}>
-          <span onClick={() => navigate('/user')}>Dashboard</span> <MdOutlineArrowForwardIos size={12} /> <span>All Notes</span>
+          <span onClick={() => navigate('/user')}>Dashboard</span> <MdOutlineArrowForwardIos size={12} /> <span>Notes</span>
         </div>)) : null 
         }
         <div className={notes.searchBar}>
-          { searchBar &&  <Input data={{
-            inputName: 'keyword',
-            inputType: 'text',
-            placeholder: 'search notes by title here ...'
-          }} /> }
+          { searchBar &&  (<Input inputName='keyword' inputType='text' placeholder='search notes by title here ...'/>) }
           { searchBar && <button onClick={triggerSearch}><MdOutlineClose size={24} /> </button> }
           { !searchBar && <button onClick={triggerSearch}><MdSearch size={24} /> </button> }
           <button onClick={triggerModal}><MdFilterListAlt size={24} /></button>

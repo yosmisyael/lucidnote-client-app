@@ -14,20 +14,15 @@ const SignIn = () => {
     <form action="" method="post">
       <div className={`${formSignIn.wrapperInput} flex flex-centered`}>
         <div className={formSignIn.wrapperIcon}><BsEnvelope size={20}/></div>
-        <Input data={{ inputName: 'email', inputType: 'email', placeholder: 'email' }}/>
+        <Input inputName= 'email' inputType= 'email' placeholder= 'email' />
       </div>
       <div className={`${formSignIn.wrapperInput} flex flex-centered`}>
         <div className={formSignIn.wrapperIcon}><BsPerson size={20}/></div>
-        <Input data={{ inputName: 'username', inputType: 'text', placeholder:'username' }}/>
+        <Input inputName= 'username' inputType= 'text' placeholder='username'/>
       </div>
       <div className={`${formSignIn.wrapperInput} flex flex-centered`}>
         <div className={ formSignIn.wrapperIcon }><BsShieldLock size={20}/></div>
-        <Input data={{
-          inputName: 'paswword',
-          inputType: passVisibility ? 'text': 'password',
-          placeholder: 'create password',
-          onChange: (isPass) => setPassword(isPass),
-        }}/>
+        <Input inputName='paswword' inputType={passVisibility ? 'text' : 'password'} placeholder='create password' onChange={(isPass) => setPassword(isPass)}/>
         <div className={formSignIn.wrapperIconSpecial} onClick={showPassword}>
           { password && !passVisibility && <BsFillEyeFill size={20}/> }
           { password && passVisibility && <BsFillEyeSlashFill size={20}/> }
@@ -35,12 +30,8 @@ const SignIn = () => {
       </div>
       <div className={`${formSignIn.wrapperInput} flex flex-centered`}>
         <div className={ formSignIn.wrapperIcon }><BsShieldCheck size={20}/></div>
-        <Input data={{
-          inputName: 'paswwordConfirm',
-          inputType: 'password',
-          placeholder: 'confirm password',
-        }}/>
-      </div>
+          <Input inputName='confirmPaswword' inputType={passVisibility ? 'text' : 'password'} placeholder='create password' onChange={(isPass) => setPassword(isPass)}/> 
+        </div>
       <div className={formSignIn.btnWrapper}>
         <Button data={{ buttonType: 'default', buttonName: 'Register' }} />
       </div>

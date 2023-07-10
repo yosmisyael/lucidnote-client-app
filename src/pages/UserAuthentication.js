@@ -1,9 +1,7 @@
-import Auth from '../features/auth/index';
-import { useLocation } from 'react-router-dom';
+import AuthFeature from '../features/auth/index';
 
-const Login = () => {
-  const { pathname } = useLocation();
-  return (<Auth currentPath={ pathname }/>);
+const Authentication = () => {
+  return <AuthFeature />;
 }
  
-export default Login;
+export default Authentication;

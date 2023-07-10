@@ -5,7 +5,7 @@ import auth from './assets/auth.module.css';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
-const Auth = () => {
+const AuthFeature = () => {
   const [isFlipped, setFlipped] = useState(false)
   const handleFlip = () => {
     setFlipped(!isFlipped)
@@ -14,7 +14,7 @@ const Auth = () => {
   return (
       <div className={ `${auth.container} flex flex-centered relative` }>
         <div className={`fixed flex ${auth.navbar}`}  onClick={() => navigate('/')}>
-          <Logo size={'3rem'}/>          
+          <div style={{ cursor: 'pointer' }}><Logo size={'3rem'} /> </div>          
         </div>
         <div className={auth.cardWrapper}>
           <div className={`${auth.card} ${ isFlipped ? auth.flipped : ''}`}>
@@ -44,4 +44,4 @@ const Auth = () => {
   );
 }
  
-export default Auth;
+export default AuthFeature;

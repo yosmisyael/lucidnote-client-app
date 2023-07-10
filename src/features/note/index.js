@@ -29,7 +29,7 @@ const CreateNotes = () => {
         </div>
       </div>
       <div className={note.note}>
-          <Input data={{inputName: 'title', inputType: 'text', placeholder: 'title here'}} />
+          <Input inputName='title' inputType='text' placeholder='title here'/>
           <div className={note.tagsContainer}>
             <div className={note.tagButton} onClick={triggerTagDialog}><BsTags size={16}/>tag</div>
           </div>

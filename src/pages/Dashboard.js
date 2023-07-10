@@ -30,6 +30,9 @@ const Dashboard = () => {
         <div className={dashboard.text}>
           <h3>Good {getTime()}, Name! </h3>
         </div>
+        <div className={dashboard.dummy}>
+          <Logo size={'3rem'}/>          
+        </div>
         {/* <div>
           <Button data={{buttonName: 'Logout', buttonType: 'default'}}/>
         </div> */}
@@ -38,7 +41,7 @@ const Dashboard = () => {
         <div className={dashboard.feature} onClick={() => navigate('/user/notes')}>
           <BsJournals size={100} /> <h2> Notes </h2>
         </div>
-        <div className={dashboard.feature}>
+        <div className={dashboard.feature} onClick={() => navigate('/user/tags')}>
           <BsTags size={100} /> <h2>Tag</h2>
         </div>
         <div className={dashboard.feature}>

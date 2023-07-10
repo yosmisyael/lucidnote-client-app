@@ -34,7 +34,7 @@
 .navbar ul {
   list-style: none;
   display: flex;
-  gap: 5em;
+  gap: 1em;
 }
 .navbar ul > li {
   display: block;

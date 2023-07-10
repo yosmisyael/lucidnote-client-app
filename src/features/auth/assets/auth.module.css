@@ -13,6 +13,8 @@
   width: 100%;
   box-shadow: 0 .1rem .2rem var(--secondary-color);
   padding: .6rem 3.5rem;
+  display: flex;
+  justify-content: flex-start;
 }
 .container .cardWrapper {
   min-height: 27rem;

@@ -1,6 +1,6 @@
-import { Input } from '../../../components/FormComponent';
-import Button from '../../../components/Button';
-import formSignIn from '../assets/form.module.css';
+import { Input } from 'src/components/FormComponent';
+import Button from 'src/components/Button';
+import formSignIn from 'src/features/auth/assets/form.module.css';
 import { BsPerson, BsShieldLock, BsFillEyeFill, BsFillEyeSlashFill } from 'react-icons/bs';
 import { useState } from 'react';
 
@@ -14,16 +14,16 @@ const SignIn = () => {
     <form action="" method="post">
       <div className={`${formSignIn.wrapperInput} flex flex-centered`}>
         <div className={formSignIn.wrapperIcon}><BsPerson size={20}/></div>
-        <Input data={{ inputName: 'username', inputType: 'text', placeholder:'username' }}/>
+        <Input inputName='username' inputType='text' placeholder='username'/>
       </div>
       <div className={`${formSignIn.wrapperInput} flex flex-centered`}>
         <div className={ formSignIn.wrapperIcon }><BsShieldLock size={20}/></div>
-        <Input data={{
-          inputName: 'paswword',
-          inputType: passVisibility ? 'text': 'password',
-          placeholder: 'password',
-          onChange: (isPass) => setPassword(isPass),
-        }}/>
+        <Input 
+          inputName= 'password'
+          inputType= {passVisibility ? 'text': 'password'}
+          placeholder= 'password'
+          onChange= {(isPass) => setPassword(isPass)}
+        />
         <div className={formSignIn.wrapperIconSpecial} onClick={showPassword}>
           { password && !passVisibility && <BsFillEyeFill size={20}/> }
           { password && passVisibility && <BsFillEyeSlashFill size={20}/> }

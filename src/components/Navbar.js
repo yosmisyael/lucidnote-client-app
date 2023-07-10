@@ -24,11 +24,11 @@ const Navbar = () => {
           <li><Link>Why LucidNote</Link></li>
           <li><Link className="flex-centered">Features <BsChevronDown className={ navbar.BsChevronDown } /></Link></li>
           <li><Link>Source</Link></li>
-          <Button data={{ buttonName: 'Login', buttonType: 'primary', func: () => navigatorClick('/login') }} />  
+          <Button buttonName='Login' buttonType='primary' func={() => navigatorClick('/login')} />  
         </ul>
       </nav>
       <div className={ `${navbar.wrapperCta} flex-centered` }>
-        <Button data={{ buttonName: <BsSearch size={20} />, buttonType: 'icon' }}/>
+        <Button buttonName={<BsSearch size={20} />} buttonType='icon'/>
         <button ref={btnMenu} onClick={ () => {
           setMenu(current => !current);
         } } style={{
@@ -53,8 +53,8 @@ const Navbar = () => {
         </ul>
       </nav>
       <div className={ `${navbar.wrapperCta} flex-centered` }>
-        <Button data={{ buttonName: <BsSearch size={20} />, buttonType: 'icon' }}/>
-        <Button data={{ buttonName: 'Login', buttonType: 'primary', func: () => navigatorClick('/login') }} />
+        <Button buttonName={<BsSearch size={20} />} buttonType='icon'/>
+        <Button buttonName='Login' buttonType='primary' func={() => navigatorClick('/login')} />
       </div>
     </header>
   )

@@ -15,15 +15,17 @@
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: space-between;
   box-shadow: 0 .1rem .2rem var(--secondary-color);
   padding: .6rem 3.5rem;
   gap: 1rem;
 }
-
 .container .navbar h3 {
   font-size: 1rem;
   font-weight: 600;
+}
+.container .navbar .dummy {
+  opacity: 0;
 }
 
 .container .wrapper {

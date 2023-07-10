@@ -15,8 +15,8 @@ const TagModal = ({triggerTagDialog}) => {
       </div>
       </div>
       <div className={tagModal.footer}>
-        <Button data={{buttonName: 'cancel', buttonType: 'default', func: triggerTagDialog}}/>
-        <Button data={{buttonName: 'submit', buttonType: 'primary'}}/>
+        <Button buttonName='cancel' buttonType='default' func={triggerTagDialog}/>
+        <Button buttonName='submit' buttonType='primary' />
       </div>
     </div>
   );
