@@ -1,9 +1,9 @@
-import SignIn from './components/SignIn';
-import SignUp from './components/SignUp';
-import Logo from '../../components/Logo';
-import auth from './assets/auth.module.css';
-import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import SignIn from './components/SignIn'
+import SignUp from './components/SignUp'
+import Logo from '../../components/Logo'
+import auth from './assets/auth.module.css'
+import { useNavigate } from 'react-router-dom'
+import { useState } from 'react'
 
 const AuthFeature = () => {
   const [isFlipped, setFlipped] = useState(false)
@@ -25,7 +25,7 @@ const AuthFeature = () => {
                 Don't have an account?
               </p>
               <p>
-               <span style={{fontWeight: '700', cursor: 'pointer'}} onClick={handleFlip} >Create account</span>  
+               <span style={{fontWeight: '700', cursor: 'pointer'}} onClick={handleFlip} >Create account</span> 
               </p>
             </div>
             <div className={auth.backSide}>

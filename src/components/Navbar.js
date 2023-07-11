@@ -14,8 +14,8 @@ const Navbar = () => {
   }
   const [menu, setMenu] = useState(false)
   const btnMenu = useRef()
-  const bigScreen = useMediaQuery({query: "(min-width: 1224px)"});
-  const smallScreen = useMediaQuery({query: "(max-width: 1223px)"});
+  const bigScreen = useMediaQuery({query: "(min-width: 1025px)"});
+  const smallScreen = useMediaQuery({query: "(max-width: 1024px)"});
   if (smallScreen) return (
     <header className={`${navbar.navbar} fixed flex flex-space-between`}>
       <a href="/"><Logo size={'3em'} /></a>
@@ -54,7 +54,7 @@ const Navbar = () => {
       </nav>
       <div className={ `${navbar.wrapperCta} flex-centered` }>
         <Button buttonName={<BsSearch size={20} />} buttonType='icon'/>
-        <Button buttonName='Login' buttonType='primary' func={() => navigatorClick('/login')} />
+        <Button buttonName='Login' buttonType='primary' func={() => navigatorClick('/authentication')} />
       </div>
     </header>
   )

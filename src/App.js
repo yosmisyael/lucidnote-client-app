@@ -12,8 +12,7 @@ function App() {
       <div className="App">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path={"/login"} element={<UserAuthentication />} />
-          <Route path={"/register"} element={<UserAuthentication />} />
+          <Route path={"/authentication"} element={<UserAuthentication />} />
           <Route path={"/user"} element={<Dashboard />}/>
           <Route path={"/user/notes"} element={<Notes />}/>
           <Route path={"/user/notes/add"} element={<CreateNotes />}/>

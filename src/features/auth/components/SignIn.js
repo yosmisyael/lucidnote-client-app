@@ -1,6 +1,6 @@
 import { Input } from 'src/components/FormComponent';
 import Button from 'src/components/Button';
-import formSignIn from 'src/features/auth/assets/form.module.css';
+import formSignIn from '../assets/form.module.css';
 import { BsPerson, BsShieldLock, BsFillEyeFill, BsFillEyeSlashFill } from 'react-icons/bs';
 import { useState } from 'react';
 
