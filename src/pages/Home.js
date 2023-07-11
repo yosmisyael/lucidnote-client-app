@@ -39,7 +39,7 @@ const Home = () => {
             Keep capturing your ideas with this app full of creativity<FcIdea /> and productivity<FcBullish />
           </p>
           <div className={`${home.btnWrapper} flex flex-centered`}>
-            <Button data={{ buttonName: 'Get Started', buttonType: 'primary'}} />
+            <Button buttonName='Get Started' buttonType='primary' />
           </div>
         </div>
         <div className={home.col2}>

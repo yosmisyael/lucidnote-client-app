@@ -1,8 +1,14 @@
+import { useState } from 'react';
 import tagModal from '../assets/tagModal.module.css';
 import Button from 'src/components/Button';
 import { Input } from 'src/components/FormComponent';
 
 const TagModal = ({ handlerModal }) => {
+  const [currentValue, setCurrentValue] = useState('initial');
+  const handleInput = (e) => {
+    setCurrentValue(e.target.value)
+    console.log(e.target.value)
+  }
   return (
     <div className={tagModal.container}>
       <div className={tagModal.header}>
@@ -10,7 +16,7 @@ const TagModal = ({ handlerModal }) => {
       </div>
       <div className={tagModal.body}>
         <div className={tagModal.inputWrapper}>
-          <Input inputName='tagName' inputType='text' value='test' />
+          <Input inputName='tagName' inputType='text' value={currentValue} onChange={handleInput} />
         </div>
       </div>
       <div className={tagModal.footer}>

@@ -5,11 +5,14 @@ import { BsPerson, BsShieldLock, BsFillEyeFill, BsFillEyeSlashFill } from 'react
 import { useState } from 'react';
 
 const SignIn = () => {
-  const [passVisibility, setPassVisibility] = useState(false);
+  const [passwordVisibility, setPasswordVisibility] = useState(false);
   const showPassword = () => {
-    setPassVisibility(current => !current); 
+    setPasswordVisibility(current => !current); 
   }
-  const [password, setPassword] = useState('');
+  const [typed, setTyped] = useState()
+  const inputHandler = (e) => {
+    setTyped(e.target.value)
+  }
   return (
     <form action="" method="post">
       <div className={`${formSignIn.wrapperInput} flex flex-centered`}>
@@ -19,18 +22,18 @@ const SignIn = () => {
       <div className={`${formSignIn.wrapperInput} flex flex-centered`}>
         <div className={ formSignIn.wrapperIcon }><BsShieldLock size={20}/></div>
         <Input 
-          inputName= 'password'
-          inputType= {passVisibility ? 'text': 'password'}
-          placeholder= 'password'
-          onChange= {(isPass) => setPassword(isPass)}
+          inputName='password'
+          inputType={passwordVisibility ? 'text': 'password'}
+          placeholder='password'
+          onChange={inputHandler}
         />
         <div className={formSignIn.wrapperIconSpecial} onClick={showPassword}>
-          { password && !passVisibility && <BsFillEyeFill size={20}/> }
-          { password && passVisibility && <BsFillEyeSlashFill size={20}/> }
+          { typed && !passwordVisibility && <BsFillEyeFill size={20}/> }
+          { typed && passwordVisibility && <BsFillEyeSlashFill size={20}/> }
         </div>
       </div>
       <div className={formSignIn.btnWrapper}>
-        <Button data={{ buttonType: 'default', buttonName: 'Login' }} />
+        <Button buttonType='default' buttonName='Login' />
       </div>
       <div className={formSignIn.wrapper}>
         <input type="checkbox" id='isCookie' className={formSignIn.checkBox} /> 
