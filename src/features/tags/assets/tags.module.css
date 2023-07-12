@@ -86,4 +86,7 @@
     margin: .5rem 2rem;
     margin-bottom: 2rem;
   }
+  .container .navbar {
+    padding: .6rem 2rem;
+  }
 }
