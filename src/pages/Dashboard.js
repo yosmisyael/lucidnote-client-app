@@ -1,10 +1,12 @@
-import Logo from 'src/components/Logo';
-// import Button from 'src/components/Button';
-import dashboard from '../assets/styles/dashboard.module.css';
-import { useNavigate } from 'react-router-dom';
-import { TfiAgenda } from 'react-icons/tfi';
-import { GoTasklist } from 'react-icons/go';
-import { BsTags, BsJournals } from 'react-icons/bs';
+import Logo from 'src/components/Logo'
+import Button from 'src/components/Button'
+import dashboard from '../assets/styles/dashboard.module.css'
+import { useNavigate } from 'react-router-dom'
+import { TfiAgenda } from 'react-icons/tfi'
+import { GoTasklist } from 'react-icons/go'
+import { BsTags, BsJournals } from 'react-icons/bs'
+import getUser from 'src/api/getUser'
+import { useState } from 'react'
 
 const Dashboard = () => {
   const navigate = useNavigate()
@@ -21,6 +23,8 @@ const Dashboard = () => {
         return 'morning'
     } 
   }
+  const [name, setName] = useState('')
+  getUser('http://localhost:3100/api/users/current').then(({ data }) => setName(data.name))
   return ( 
     <section className={dashboard.container}>
       <div className={dashboard.navbar}>
@@ -28,14 +32,11 @@ const Dashboard = () => {
           <Logo size={'3rem'}/>          
         </div>
         <div className={dashboard.text}>
-          <h3>Good {getTime()}, Name! </h3>
+          <h3>Good {getTime()}, {name}! </h3>
         </div>
-        <div className={dashboard.dummy}>
-          <Logo size={'3rem'}/>          
+        <div>
+          <Button buttonName='Logout' buttonType='default' />
         </div>
-        {/* <div>
-          <Button data={{buttonName: 'Logout', buttonType: 'default'}}/>
-        </div> */}
       </div>
       <div className={dashboard.wrapper}>
         <div className={dashboard.feature} onClick={() => navigate('/user/notes')}>
@@ -52,7 +53,7 @@ const Dashboard = () => {
         </div>
       </div>      
     </section>
-  );
+  )
 }
  
-export default Dashboard;
+export default Dashboard
