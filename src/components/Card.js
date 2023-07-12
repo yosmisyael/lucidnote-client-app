@@ -1,18 +1,19 @@
 import  cardStyle from '../assets/styles/card.module.css';
 
-const Card = () => {
+const Card = ({ date, title, tags, body }) => {
   return (
     <div className={cardStyle.card}>
       <div className={cardStyle.cardHeader}>
-        <h2>21 March</h2>
-        <h1>This is card title</h1>
+        <h2>{ date }</h2>
+        <h1>{ title }</h1>
         <div className={cardStyle.tagsContainer}>
-          <div className={cardStyle.tag}>tag1</div>
-          <div className={cardStyle.tag}>tag2</div>
+          { tags.map(tag => (
+            <div className={cardStyle.tag}>{ tag }</div>
+          )) }
         </div>
       </div>
       <div className={cardStyle.cardBody}>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere deleniti ducimus quas itaque.
+        { body }
       </div>
       <div className={cardStyle.cardFooter}>
         this is footer
