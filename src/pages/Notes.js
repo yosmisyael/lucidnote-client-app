@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import { Input } from '../components/FormComponent';
 import Card from 'src/components/Card';
@@ -8,8 +8,8 @@ import TagModal from 'src/components/Modals';
 import { MdNoteAdd, MdOutlineArrowForwardIos, MdFilterListAlt, MdOutlineClose, MdSearch } from 'react-icons/md'
 
 const Notes = () => {
-  const mobile = useMediaQuery({ query: '(max-width: 768px)' })
   const navigate = useNavigate()
+  const mobile = useMediaQuery({ query: '(max-width: 768px)' })
   const [modal, setModal] = useState(false)
   const [searchBar, setSearchBar] = useState(false)
   const triggerModal = () => {
@@ -17,7 +17,24 @@ const Notes = () => {
   }
   const triggerSearch = () => {
     setSearchBar(!searchBar)
-  } 
+  }
+
+  const [noteList, setNoteList] = useState([])
+  const getNotes = async () => {
+    const response = await fetch('http://localhost:3100/api/notes', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': localStorage.getItem('token')
+      }
+    })
+    const { data } = await response.json()
+    setNoteList(data)
+  }
+  useEffect(() => {
+    getNotes()
+  }, [])
+
   return (
     <section className={notes.container}>
       { modal && <div className={notes.shadow}></div> }
@@ -47,8 +64,9 @@ const Notes = () => {
       </div>
         { modal && <TagModal triggerModal={triggerModal} /> }
       <div className={notes.noteWrapper}>
-        <Card />
-        <Card />
+        { noteList.map(note => (
+          <Card key={ note.id } id={ note.id } date={ note.updatedAt}  title={ note.title } body={ note.body } />
+        )) }
       </div>
       <div className={notes.buttonNav} onClick={() => navigate('/user/notes/add')}>
         <MdNoteAdd size={20}/> Add new note
