@@ -21,12 +21,13 @@ const Dashboard = () => {
   const navigate = useNavigate()
   const getTime = () => {
     const time = new Date(Date.now()).getHours()
+    console.log(time)
     switch (true) {
-      case time < 18:
+      case time > 12:
         return 'afternoon'
-      case time < 22:
+      case time > 18:
         return 'evening'
-      case time < 24:
+      case time > 22:
         return 'night'
       default:
         return 'morning'
