@@ -7,8 +7,17 @@ import { GoTasklist } from 'react-icons/go'
 import { BsTags, BsJournals } from 'react-icons/bs'
 import getUser from 'src/api/getUser'
 import { useState } from 'react'
+import logout from 'src/api/logout'
 
 const Dashboard = () => {
+  const logoutHandler = async () => {
+    logout('http://localhost:3100/api/users/logout')
+      .then(response => {
+        if (response.data === 'OK') {
+          navigate('/')
+        }
+      })
+  }
   const navigate = useNavigate()
   const getTime = () => {
     const time = new Date(Date.now()).getHours()
@@ -35,7 +44,7 @@ const Dashboard = () => {
           <h3>Good {getTime()}, {name}! </h3>
         </div>
         <div>
-          <Button buttonName='Logout' buttonType='default' />
+          <Button buttonName='Logout' buttonType='default' func={logoutHandler} />
         </div>
       </div>
       <div className={dashboard.wrapper}>
