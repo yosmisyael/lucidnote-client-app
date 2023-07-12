@@ -41,7 +41,7 @@ const register = async (url, data) => {
       color: 'var(--text-primary)',
       confirmButtonColor: 'var(--text-primary)'
     })
-    return response.status
+    return { status: response.status, ...await response.json()}
   } catch (error) {
     MySwal.fire({
       title: <p>Register Failed</p>,

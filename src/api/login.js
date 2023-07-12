@@ -1,4 +1,3 @@
-import { redirect } from 'react-router-dom'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 
@@ -20,11 +19,10 @@ const login = async (url, data) => {
     }
     const { data: { token } } = await response.json()
     localStorage.setItem('token', token)
-    redirect('/user')
-    return
+    return { status: response.status }
   } catch (error) {
     MySwal.fire({
-      title: <p>Register Failed</p>,
+      title: <p>Login Failed</p>,
       text: error.message,
       icon: 'error',
       iconColor: 'var(--text-primary)',

@@ -19,40 +19,47 @@ const SignUp = () => {
   const usernameRef = useRef()
   const passwordRef = useRef()
   const confirmPasswordRef = useRef()
-
+  const submitHandler = async (e) => {
+    e.preventDefault()
+    const data = {
+      email: emailRef.current.value,
+      name: nameRef.current.value,
+      username: usernameRef.current.value,
+      password: passwordRef.current.value,
+    }
+    if (!validatePassword(passwordRef, confirmPasswordRef)) return
+    try {
+      const response = register('http://localhost:3100/api/users', data)
+        if (response.status === 200) {
+          emailRef.current.value = ''
+          nameRef.current.value = ''
+          usernameRef.current.value = ''
+          passwordRef.current.value = ''
+          confirmPasswordRef.current.value = ''
+        } else {
+          throw new Error('Registration Failed')
+        }      
+    } catch (error) {
+      return error
+    }
+  }
   return (
-    <form action="" method="post" onSubmit={(e) => {
-      e.preventDefault()
-      const data = {
-        email: emailRef.current.value,
-        name: nameRef.current.value,
-        username: usernameRef.current.value,
-        password: passwordRef.current.value,
-      }
-      if (!validatePassword(passwordRef, confirmPasswordRef)) return
-      if (register('http://localhost:3100/api/users', data)) {
-        emailRef.current.value = '';
-        nameRef.current.value = '';
-        usernameRef.current.value = '';
-        passwordRef.current.value = '';
-        confirmPasswordRef.current.value = '';
-      }
-    }}>
+    <form onSubmit={submitHandler}>
       <div className={`${formSignIn.wrapperInput} flex flex-centered`}>
         <div className={formSignIn.wrapperIcon}><BsEnvelope size={20}/></div>
-        <Input inputName= 'email' inputType= 'email' placeholder= 'email' ref={emailRef} />
+        <Input inputName= 'email' inputType= 'email' placeholder= 'email' ref={emailRef} required={true} />
       </div>
       <div className={`${formSignIn.wrapperInput} flex flex-centered`}>
         <div className={formSignIn.wrapperIcon}><BsPerson size={20}/></div>
-        <Input inputName= 'name' inputType= 'text' placeholder= 'name' ref={nameRef} />
+        <Input inputName= 'name' inputType= 'text' placeholder= 'name' ref={nameRef} required={true} />
       </div>
       <div className={`${formSignIn.wrapperInput} flex flex-centered`}>
         <div className={formSignIn.wrapperIcon}><BsPerson size={20}/></div>
-        <Input inputName= 'registerUsername' inputType= 'text' placeholder='username' ref={usernameRef} />
+        <Input inputName= 'registerUsername' inputType= 'text' placeholder='username' ref={usernameRef} required={true} />
       </div>
       <div className={`${formSignIn.wrapperInput} flex flex-centered`}>
         <div className={ formSignIn.wrapperIcon }><BsShieldLock size={20}/></div>
-        <Input inputName='paswword' inputType={passVisibility ? 'text' : 'password'} placeholder='create password' onChange={inputHandler} ref={passwordRef} />
+        <Input inputName='paswword' inputType={passVisibility ? 'text' : 'password'} placeholder='create password' onChange={inputHandler} ref={passwordRef} required={true} />
         <div className={formSignIn.wrapperIconSpecial} onClick={showPassword}>
           { typed && !passVisibility && <BsFillEyeFill size={20}/> }
           { typed && passVisibility && <BsFillEyeSlashFill size={20}/> }
@@ -60,7 +67,7 @@ const SignUp = () => {
       </div>
       <div className={`${formSignIn.wrapperInput} flex flex-centered`}>
         <div className={ formSignIn.wrapperIcon }><BsShieldCheck size={20}/></div>
-          <Input inputName='confirmPassword' inputType='password' placeholder='confirm password' ref={confirmPasswordRef} /> 
+          <Input inputName='confirmPassword' inputType='password' placeholder='confirm password' ref={confirmPasswordRef} required={true} /> 
         </div>
       <div className={formSignIn.btnWrapper}>
         <Button buttonType='default' buttonName='Register' />
