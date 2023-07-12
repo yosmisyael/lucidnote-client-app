@@ -24,7 +24,7 @@ const Navbar = () => {
           <li><Link>Why LucidNote</Link></li>
           <li><Link className="flex-centered">Features <BsChevronDown className={ navbar.BsChevronDown } /></Link></li>
           <li><Link>Source</Link></li>
-          <Button buttonName='Login' buttonType='primary' func={() => navigatorClick('/login')} />  
+          <Button buttonName='Login' buttonType='primary' func={() => navigatorClick('/authentication')} />  
         </ul>
       </nav>
       <div className={ `${navbar.wrapperCta} flex-centered` }>
