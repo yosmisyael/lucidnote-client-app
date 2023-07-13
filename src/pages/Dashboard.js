@@ -49,7 +49,7 @@ const Dashboard = () => {
       </div>
       <div className={dashboard.wrapper}>
         <div className={dashboard.feature} onClick={() => navigate('/user/notes')}>
-          <BsJournals size={100} /> <h2> Notes </h2>
+          <BsJournals size={100} /> <h2> Note </h2>
         </div>
         <div className={dashboard.feature} onClick={() => navigate('/user/tags')}>
           <BsTags size={100} /> <h2>Tag</h2>
