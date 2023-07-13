@@ -9,7 +9,15 @@
   --text-secondary: #2B2C2F;
   --text-accent: #275774;
 }
+::-moz-selection {
+  color: var(--text-primary);
+  background: var(--primary-color);
+}
 
+::selection {
+  color: var(--text-primary);
+  background: var(--primary-color);
+}
 * {
   margin: 0;
   padding: 0;
