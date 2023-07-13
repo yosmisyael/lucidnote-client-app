@@ -5,8 +5,10 @@ import Navbar from '../components/Navbar';
 import Button from '../components/Button';
 import homepageIcon from '../assets/icon-homepage.svg';
 import { FcIdea, FcBullish } from 'react-icons/fc';
+import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
+  const navigate = useNavigate()
   return (
     <React.Fragment>
       <Navbar />
@@ -39,7 +41,7 @@ const Home = () => {
             Keep capturing your ideas with this app full of creativity<FcIdea /> and productivity<FcBullish />
           </p>
           <div className={`${home.btnWrapper} flex flex-centered`}>
-            <Button buttonName='Get Started' buttonType='primary' />
+            <Button buttonName='Get Started' buttonType='primary' func={() => navigate('/authentication')} />
           </div>
         </div>
         <div className={home.col2}>
