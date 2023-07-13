@@ -6,6 +6,7 @@ const getUser = async (url) => {
       'Content-Type': 'application/json'
     }
   })
-  return response.json()
+  const { data } = await response.json()  
+  return data
 }
 export default getUser
