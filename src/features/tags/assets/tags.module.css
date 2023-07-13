@@ -35,34 +35,6 @@
   border-bottom: .25rem solid var(--text-primary);
   padding-bottom: .25rem;
 }
-.container .wrapper {
-  margin: .5rem 4rem;
-  display: flex;
-  flex-wrap: wrap;
-  gap: .3rem;
-}
-.container .wrapper .tagWrapper {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 1rem;
-  padding: 1rem;
-  width: 100%;
-  box-shadow: 0 .1rem .2rem var(--secondary-color);
-  border-left: .2rem solid var(--text-primary);
-  border-top-left-radius: .2rem;
-  border-bottom-left-radius: .2rem;
-}
-.container .wrapper .tagWrapper h2 {
-  font-size: 1rem;
-}
-.container .wrapper .tagWrapper .actionBtn {
-  display: inline-flex;
-  gap: 1rem;
-}
-.container .wrapper .tagWrapper .actionBtn span {
-  cursor: pointer;
-}
 
 .container .btnAdd {
   position: fixed;

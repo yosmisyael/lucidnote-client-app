@@ -1,13 +1,14 @@
-import { useNavigate } from 'react-router-dom';
-import tags from './assets/tags.module.css';
-import TagModal from './components/tagModal';
-import { MdOutlineArrowForwardIos, MdOutlineModeEdit, MdAddHome } from 'react-icons/md';
-import { BsTags, BsTrash } from 'react-icons/bs';
-import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom'
+import tags from './assets/tags.module.css'
+import TagModal from './components/tagModal'
+import TagCard from './components/TagCard'
+import { MdOutlineArrowForwardIos, MdAddHome } from 'react-icons/md'
+import { BsTags } from 'react-icons/bs'
+import { useState, useEffect } from 'react'
 
 const TagsFeature = () => {
-  const navigate = useNavigate();
-  const [tagConfigurationModal, setTagConfigurationModal] = useState(false);
+  const navigate = useNavigate()
+  const [tagConfigurationModal, setTagConfigurationModal] = useState(false)
   const handlerModal = () => {
     setTagConfigurationModal(!tagConfigurationModal)
   }
@@ -39,22 +40,14 @@ const TagsFeature = () => {
         <h1>Tag List <BsTags /></h1>
       </div>
       { tagList.map(tag => (
-        <div key={ tag.id } className={tags.wrapper}>
-          <div className={tags.tagWrapper}>
-            <h2>{ tag.tagName }</h2>
-            <div className={tags.actionBtn}>
-              <span><MdOutlineModeEdit size={20}/></span>
-              <span><BsTrash size={20}/></span>
-            </div>
-          </div>
-        </div>
+        <TagCard key={ tag.id } id={ tag.id } tagName={ tag.tagName }/>
       ))}
       <div className={tags.btnAdd} onClick={handlerModal}> 
         <MdAddHome size={24}/> Add Tag
       </div>
       { tagConfigurationModal && <TagModal handlerModal={ handlerModal }/> }
     </section>
-  );
+  )
 }
  
-export default TagsFeature;
+export default TagsFeature
