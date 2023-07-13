@@ -27,7 +27,10 @@ const TagsFeature = () => {
   }
   useEffect(() => {
     getTags()
-  })
+  }, [])
+  useEffect(() => {
+    getTags()
+  }, [tagList])
 
   return (
     <section className={tags.container}>
