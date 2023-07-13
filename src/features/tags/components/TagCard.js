@@ -2,6 +2,10 @@ import { MdOutlineModeEdit, MdOutlineClose, MdOutlineCheck } from 'react-icons/m
 import { BsTrash } from 'react-icons/bs'
 import tags from '../assets/tagCard.module.css'
 import { useState, useRef, useEffect } from 'react'
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+
+const MySwal = withReactContent(Swal)
 
 const TagCard = ({ id, tagName }) => {
   const [editMode, setEditMode] = useState(false)
@@ -12,6 +16,7 @@ const TagCard = ({ id, tagName }) => {
   }
 
   const inputTagRef = useRef()
+  
   useEffect(() => {
     if (editMode) {
       inputTagRef.current.focus();
@@ -38,7 +43,14 @@ const TagCard = ({ id, tagName }) => {
       }
       setEditMode(!editMode)
     } catch (error) {
-      console.log(error.message)
+      MySwal.fire({
+        title: <p>Update Tag Failed</p>,
+        text: error.message,
+        icon: 'error',
+        iconColor: 'var(--text-primary)',
+        color: 'var(--text-primary)',
+        confirmButtonColor: 'var(--text-primary)'
+      })
     }
   } 
 
