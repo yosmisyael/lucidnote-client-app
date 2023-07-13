@@ -5,17 +5,25 @@ import Button from '../components/Button';
 import navbar from '../assets/styles/navbar.module.css';
 import Logo from '../components/Logo';
 import { useMediaQuery } from 'react-responsive';
-import { useRef, useState } from 'react';
+import { useRef, useState, useContext } from 'react';
+import { AuthContext } from 'src/contexts/AuthContext';
 
 const Navbar = () => {
   const navigate = useNavigate();
+
+  const isAuthenticated = useContext(AuthContext) 
+
   function navigatorClick (path) {
     navigate(path)
   }
+
   const [menu, setMenu] = useState(false)
+
   const btnMenu = useRef()
+
   const bigScreen = useMediaQuery({query: "(min-width: 1025px)"});
   const smallScreen = useMediaQuery({query: "(max-width: 1024px)"});
+
   if (smallScreen) return (
     <header className={`${navbar.navbar} fixed flex flex-space-between`}>
       <a href="/"><Logo size={'3em'} /></a>
@@ -24,7 +32,11 @@ const Navbar = () => {
           <li><Link>Why LucidNote</Link></li>
           <li><Link className="flex-centered">Features <BsChevronDown className={ navbar.BsChevronDown } /></Link></li>
           <li><Link>Source</Link></li>
-          <Button buttonName='Login' buttonType='primary' func={() => navigatorClick('/authentication')} />  
+          { !isAuthenticated ? (
+            <Button buttonName='Login' buttonType='primary' func={() => navigatorClick('/authentication')} />
+          ) : (
+            <Button buttonName='dashboard' buttonType='primary' func={() => navigatorClick('/user')} />
+          )}  
         </ul>
       </nav>
       <div className={ `${navbar.wrapperCta} flex-centered` }>
@@ -54,7 +66,11 @@ const Navbar = () => {
       </nav>
       <div className={ `${navbar.wrapperCta} flex-centered` }>
         <Button buttonName={<BsSearch size={20} />} buttonType='icon'/>
-        <Button buttonName='Login' buttonType='primary' func={() => navigatorClick('/authentication')} />
+          { !isAuthenticated ? (
+            <Button buttonName='Login' buttonType='primary' func={() => navigatorClick('/authentication')} />
+          ) : (
+            <Button buttonName='dashboard' buttonType='primary' func={() => navigatorClick('/user')} />
+          )}    
       </div>
     </header>
   )
