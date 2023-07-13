@@ -5,13 +5,12 @@ import Button from '../components/Button';
 import navbar from '../assets/styles/navbar.module.css';
 import Logo from '../components/Logo';
 import { useMediaQuery } from 'react-responsive';
-import { useRef, useState, useContext } from 'react';
-import { AuthContext } from 'src/contexts/AuthContext';
+import { useRef, useState } from 'react';
 
 const Navbar = () => {
   const navigate = useNavigate();
 
-  const isAuthenticated = useContext(AuthContext) 
+  const isAuthenticated = localStorage.getItem('token') 
 
   function navigatorClick (path) {
     navigate(path)
