@@ -40,3 +40,7 @@
 .wrapper .tagWrapper .actionBtn span {
   cursor: pointer;
 }
+
+.customCancelButton {
+  color: var(--text-primary) !important;
+}

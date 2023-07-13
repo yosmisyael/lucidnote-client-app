@@ -54,6 +54,57 @@ const TagCard = ({ id, tagName }) => {
     }
   } 
 
+  const handleDelete = async () => {
+    const tagId = inputTagRef.current.getAttribute('data-id')
+    try {
+      MySwal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        iconColor: 'var(--text-primary)',
+        showCancelButton: true,
+        confirmButtonColor: 'var(--text-primary)',
+        cancelButtonColor: 'var(--secondary-color)',
+        confirmButtonText: 'Delete',
+        customClass: {
+          cancelButton: tags.customCancelButton
+        }
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          const response = await fetch(`http://localhost:3100/api/tags/${tagId}`, {
+            method: 'DELETE',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': localStorage.getItem('token')
+            }
+          })
+          if (response.status !== 200) {
+            const { errors } = await response.json()
+            throw new Error(errors)
+          }
+          MySwal.fire({
+            title: <p>Delete Tag Success</p>,
+            text: 'Your tag has been deleted.',
+            icon: 'success',
+            iconColor: 'var(--text-primary)',
+            color: 'var(--text-primary)',
+            confirmButtonColor: 'var(--text-primary)'
+          })
+        }
+      })
+
+    } catch (error) {
+      MySwal.fire({
+        title: <p>Delete Tag Failder</p>,
+        text: error.message,
+        icon: 'error',
+        iconColor: 'var(--text-primary)',
+        color: 'var(--text-primary)',
+        confirmButtonColor: 'var(--text-primary)'
+      })
+    }
+  }
+
   return (
     <div className={tags.wrapper}>
       <div className={tags.tagWrapper}>
@@ -68,7 +119,7 @@ const TagCard = ({ id, tagName }) => {
           { editMode && (
             <span onClick={commitEdit}><MdOutlineCheck size={20}/></span>
           ) }
-          <span><BsTrash size={20}/></span>
+          <span onClick={handleDelete}><BsTrash size={20}/></span>
         </div>
       </div>
     </div>
