@@ -9,10 +9,11 @@ const MySwal = withReactContent(Swal)
 
 const TagCard = ({ id, tagName }) => {
   const [editMode, setEditMode] = useState(false)
+  const [originalValue, setOriginalValue] = useState('')
   
   const triggerEditMode = () => {
     setEditMode(!editMode)
-    console.log(inputTagRef.current.id)
+    setOriginalValue(tagName)
   }
 
   const inputTagRef = useRef()
@@ -22,6 +23,11 @@ const TagCard = ({ id, tagName }) => {
       inputTagRef.current.focus();
     }
   }, [editMode]);
+
+  const cancelEdit = () => {
+    triggerEditMode()
+    inputTagRef.current.value = originalValue
+  }
 
   const commitEdit = async () => {
     const tagId = inputTagRef.current.getAttribute('data-id')
@@ -41,8 +47,17 @@ const TagCard = ({ id, tagName }) => {
         const { errors } = await response.json()
         throw new Error(errors)
       }
+      MySwal.fire({
+        position: 'top-end',
+        icon: 'success',
+        iconColor: 'var(--text-primary)',
+        title: 'Tag updated successfully',
+        showConfirmButton: false,
+        timer: 1500
+      })
       setEditMode(!editMode)
     } catch (error) {
+      inputTagRef.current.focus()
       MySwal.fire({
         title: <p>Update Tag Failed</p>,
         text: error.message,
@@ -51,6 +66,7 @@ const TagCard = ({ id, tagName }) => {
         color: 'var(--text-primary)',
         confirmButtonColor: 'var(--text-primary)'
       })
+      
     }
   } 
 
@@ -114,7 +130,7 @@ const TagCard = ({ id, tagName }) => {
             <span onClick={triggerEditMode}><MdOutlineModeEdit size={20}/></span>
           ) }
           { editMode && (
-            <span onClick={triggerEditMode}><MdOutlineClose size={20}/></span>
+            <span onClick={cancelEdit}><MdOutlineClose size={20}/></span>
           ) }
           { editMode && (
             <span onClick={commitEdit}><MdOutlineCheck size={20}/></span>

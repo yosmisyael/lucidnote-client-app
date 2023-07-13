@@ -27,9 +27,6 @@ const TagsFeature = () => {
   }
   useEffect(() => {
     getTags()
-  }, [])
-  useEffect(() => {
-    getTags()
   }, [tagList])
 
   return (
@@ -48,7 +45,7 @@ const TagsFeature = () => {
       <div className={tags.btnAdd} onClick={handlerModal}> 
         <MdAddHome size={24}/> Add Tag
       </div>
-      { tagConfigurationModal && <TagModal handlerModal={ handlerModal }/> }
+      { tagConfigurationModal && (<TagModal handlerModal={ handlerModal }/>) }
     </section>
   )
 }

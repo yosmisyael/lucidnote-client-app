@@ -29,6 +29,7 @@ const TagModal = ({ handlerModal }) => {
       }
       handlerModal()
     } catch (error) {
+      inputTagRef.current.focus()
       MySwal.fire({
         title: <p>Update Tag Failed</p>,
         text: error.message,
@@ -47,7 +48,7 @@ const TagModal = ({ handlerModal }) => {
       </div>
       <div className={tagModal.body}>
         <div className={tagModal.inputWrapper}>
-          <Input inputName='tagName' inputType='text' ref={inputTagRef} />
+          <Input inputName='tagName' inputType='text' placeholder='new tag name' ref={inputTagRef} />
         </div>
       </div>
       <div className={tagModal.footer}>
