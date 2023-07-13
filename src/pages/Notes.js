@@ -65,7 +65,7 @@ const Notes = () => {
         { modal && <TagModal triggerModal={triggerModal} /> }
       <div className={notes.noteWrapper}>
         { noteList.map(note => (
-          <Card key={ note.id } id={ note.id } date={ note.updatedAt}  title={ note.title } body={ note.body } />
+          <Card key={ note.id } id={ note.id } updatedAt={ note.updatedAt} createdAt={ note.createdAt } title={ note.title } body={ note.body } />
         )) }
       </div>
       <div className={notes.buttonNav} onClick={() => navigate('/user/notes/add')}>

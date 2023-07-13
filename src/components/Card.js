@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import  cardStyle from '../assets/styles/card.module.css';
 
-const Card = ({ id, date, title, body }) => {
+const Card = ({ id, updatedAt, createdAt, title, body }) => {
   const timeConverter = (unixTime) => {
     return new Date(unixTime).toLocaleDateString()
   }
@@ -24,19 +24,21 @@ const Card = ({ id, date, title, body }) => {
   return (
     <div className={cardStyle.card}>
       <div className={cardStyle.cardHeader}>
-        <h2>{ timeConverter(date) }</h2>
+        <h2>{ timeConverter(updatedAt) }</h2>
         <h1>{ title }</h1>
+        { tags.length !== 0 && (
         <div className={cardStyle.tagsContainer}>
           { tags.map((tag, index) => (
             <div key={index} className={cardStyle.tag}>{ tag }</div>
           )) }
         </div>
+        ) }
       </div>
       <div className={cardStyle.cardBody}>
         { body }
       </div>
       <div className={cardStyle.cardFooter}>
-        this is footer
+        <i>created at { timeConverter(createdAt) } </i>
       </div>
     </div>
   );
