@@ -48,7 +48,6 @@ const TagCard = ({ id, tagName }) => {
         throw new Error(errors)
       }
       MySwal.fire({
-        position: 'top-end',
         icon: 'success',
         iconColor: 'var(--text-primary)',
         title: 'Tag updated successfully',

@@ -44,3 +44,9 @@
 .customCancelButton {
   color: var(--text-primary) !important;
 }
+
+@media screen and (max-width: 1024px) {
+  .wrapper {
+    margin: .5rem 2rem;
+  }
+}
