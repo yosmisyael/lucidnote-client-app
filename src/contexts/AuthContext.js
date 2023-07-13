@@ -13,8 +13,11 @@ export function AuthProvider ({ children }) {
         .then(response => {
           setUser(response)
         })
+      } else {
+        setUser(null)
       }
     }, [token])
+
     return (
       <AuthContext.Provider value={user}>
         { children }

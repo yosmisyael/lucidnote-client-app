@@ -5,9 +5,9 @@ import { useNavigate } from 'react-router-dom'
 import { TfiAgenda } from 'react-icons/tfi'
 import { GoTasklist } from 'react-icons/go'
 import { BsTags, BsJournals } from 'react-icons/bs'
+import getUser from 'src/api/getUser'
+import { useState } from 'react'
 import logout from 'src/api/logout'
-import { useContext } from 'react'
-import { AuthContext } from 'src/contexts/AuthContext'
 
 const Dashboard = () => {
   const logoutHandler = async () => {
@@ -18,9 +18,7 @@ const Dashboard = () => {
         }
       })
   }
-  
   const navigate = useNavigate()
-  
   const getTime = () => {
     const time = new Date(Date.now()).getHours()
     switch (true) {
@@ -34,16 +32,16 @@ const Dashboard = () => {
         return 'morning'
     } 
   }
-
-  const { name } = useContext(AuthContext);
-  return (  
+  const [name, setName] = useState('')
+  getUser('http://localhost:3100/api/users/current').then(({ name }) => {setName(name)})
+  return ( 
     <section className={dashboard.container}>
       <div className={dashboard.navbar}>
         <div style={{cursor: 'pointer'}} onClick={() => navigate('/')}>
           <Logo size={'3rem'}/>          
         </div>
         <div className={dashboard.text}>
-          <h3>Good { getTime() }, { name }! </h3>
+          <h3>Good {getTime()}, {name}! </h3>
         </div>
         <div>
           <Button buttonName='Logout' buttonType='default' func={logoutHandler} />
