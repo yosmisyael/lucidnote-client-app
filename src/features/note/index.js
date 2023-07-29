@@ -1,19 +1,57 @@
-import note from './assets/note.module.css';
-import TextEditor from './components/TextEditor';
-import TagModal from './components/TagModal';
-import { Input } from '../../components/FormComponent';
-import { BsTags } from 'react-icons/bs';
-import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import note from './assets/note.module.css'
+import TextEditor from './components/TextEditor'
+import TagModal from './components/TagModal'
+import { Input } from '../../components/FormComponent'
+import { BsTags } from 'react-icons/bs'
+import { useNavigate } from 'react-router-dom'
+import { useState, useRef } from 'react'
 import { MdOutlineClose, MdOutlineCheck } from 'react-icons/md'
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+
+const MySwal = withReactContent(Swal)
 
 const CreateNotes = () => {
   const navigate = useNavigate()
+  
   const [tagDialog, setTagDialog] = useState(false)
+  
   const triggerTagDialog = () => {
     setTagDialog(!tagDialog)
   }
-
+  const titleRef = useRef()
+  const [notes, setNotes] = useState('')
+  const addNoteHandle = async () => {
+    const title = titleRef.current.value
+    const body = notes
+    try {
+      const response = await fetch('http://localhost:3100/api/notes', {
+        method: 'POST', 
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': localStorage.getItem('token')
+        },
+        body: JSON.stringify({
+          title,
+          body
+        })
+      })
+      if (response.status !== 200) {
+        const { errors } = await response.json()
+        throw new Error(errors)
+      }
+      navigate('/user/notes')
+    } catch (error) {
+      MySwal.fire({
+        title: <p>Failed to Save</p>,
+        text: error.message,
+        icon: 'error',
+        iconColor: 'var(--text-primary)',
+        color: 'var(--text-primary)',
+        confirmButtonColor: 'var(--text-primary)'
+      })
+    }
+  }
   return (
     <section className={note.container}>
       { tagDialog && <TagModal triggerTagDialog={triggerTagDialog}/>}
@@ -24,19 +62,17 @@ const CreateNotes = () => {
         <div>
           Create Note
         </div> 
-        <div className={note.navigate}>
+        <div className={note.navigate} onClick={addNoteHandle}>
           <MdOutlineCheck size={24}/>
         </div>
       </div>
-      <div className={note.note}>
-          <Input inputName='title' inputType='text' placeholder='title here'/>
-          <div className={note.tagsContainer}>
-            <div className={note.tagButton} onClick={triggerTagDialog}><BsTags size={16}/>tag</div>
-          </div>
-          <TextEditor />
+      <div className={note.noteEditor}>
+        <Input ref={titleRef} placeholder="Untitled" />
+        <div className={note.tagButton} onClick={triggerTagDialog}><BsTags /> Tag:</div>
+        <TextEditor value={notes} onChange={setNotes} />
       </div>
     </section>
-  );
+  )
 }
  
-export default CreateNotes;
+export default CreateNotes

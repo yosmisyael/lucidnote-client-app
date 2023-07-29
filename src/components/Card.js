@@ -35,7 +35,6 @@ const Card = ({ id, updatedAt, createdAt, title, body }) => {
         ) }
       </div>
       <div className={cardStyle.cardBody}>
-        { body }
       </div>
       <div className={cardStyle.cardFooter}>
         <i>created at { timeConverter(createdAt) } </i>

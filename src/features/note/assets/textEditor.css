@@ -1,0 +1,12 @@
+.ql-container.ql-snow {
+  font-size: 1rem;
+  border: none;
+}
+.ql-toolbar.ql-snow {
+  padding: 1rem 0;
+  text-align: center;
+  border: none;
+  border-top: 1px solid var(--text-primary);
+  border-bottom: 1px solid var(--text-primary);
+  top: 2.5rem;
+}

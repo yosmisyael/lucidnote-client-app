@@ -1,11 +1,22 @@
-import React from 'react';
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
+import React, { useCallback } from "react"
+import Quill from "quill"
+import "quill/dist/quill.snow.css"
+import "../assets/textEditor.css"
 
-const TextEditor = () => {
+export default function TextEditor() {
+  const wrapperRef = useCallback(wrapper => {
+    const options = {
+      theme: "snow",
+      placeholder: "write your note here"
+    }
+    if (wrapper == null) return
+    wrapper.innerHTML = ""
+    const editor = document.createElement("div")
+    wrapper.append(editor)
+    new Quill(editor, options) 
+  }, [])
+
   return (
-    <ReactQuill theme='snow' placeholder='write note here' style={{ width: '100%', height: '80%'}}/> 
+    <div ref={wrapperRef}></div>
   )
 }
- 
-export default TextEditor;

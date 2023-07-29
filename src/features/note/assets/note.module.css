@@ -1,6 +1,10 @@
   /* .container * {
     border: 1px solid red;
   } */
+::selection {
+  background-color: var(--text-primary) !important;
+  color: var(--primary-color) !important;
+}
 
 .container  {
   min-height: 100vh;
@@ -17,17 +21,23 @@
   align-items: center;
   padding: 1rem;
 }
-.container .note {
+.container .noteEditor {
   width: 100%;
   background-color: var(--primary-color);
   padding: 0rem 4rem 0 4rem;
   margin-top: 4rem;
 }
-.container .note input {
+.container .noteEditor input {
   font-size: 3rem;
   padding: 0;
+  border: none;
+  margin-bottom: 1rem;
 }
-.container .note .tagsContainer {
+.container .noteEditor input:focus {
+  outline: none;
+}
+
+.container .noteEditor .tagsContainer {
   padding: 0rem 0 1rem 0;
 }
 .container .navbar {
@@ -51,24 +61,22 @@
 }
 
 .tagButton {
-  background-color: var(--primary-color);
-  color: var(--text-primary);
   display: flex;
   gap: .3rem;
   width: max-content;
   padding: .5rem;
   align-items: center;
   cursor: pointer;
-  margin-left: 1rem;
+  margin: 0 0 1rem 0;
 }
 
 @media screen and (max-width: 1024px) {
-  .container .note {
+  .container .noteEditor {
     width: 100%;
     background-color: var(--primary-color);
     padding: 0;
   }
-  .container .note input {
+  .container .noteEditor input {
     padding: .5rem;
     font-size: 2rem;
   }
