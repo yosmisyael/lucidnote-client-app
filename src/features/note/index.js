@@ -53,7 +53,6 @@ const CreateNotes = () => {
       })
     }
   }
-  console.log(selectedTags)
   return (
     <section className={createNoteStyle.container}>
       { tagDialog && <TagModal triggerTagDialog={triggerTagDialog} selectedTags={selectedTags} setSelectedTags={setSelectedTags} />}
