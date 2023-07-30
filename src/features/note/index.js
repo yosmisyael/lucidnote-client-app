@@ -1,84 +1,78 @@
-import createNoteStyle from './assets/note.module.css'
-import TextEditor from './components/TextEditor'
-import TagModal from './components/TagModal'
-import { Input } from '../../components/FormComponent'
-import { BsTags } from 'react-icons/bs'
-import { useNavigate } from 'react-router-dom'
-import { useState, useRef } from 'react'
-import { MdOutlineClose, MdOutlineCheck } from 'react-icons/md'
-import Swal from 'sweetalert2'
-import withReactContent from 'sweetalert2-react-content'
+import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useMediaQuery } from 'react-responsive';
+import { Input } from 'src/components/FormComponent';
+import Card from 'src/components/Card';
+import notes from 'src/assets/styles/notes.module.css';
+import TagModal from 'src/components/Modals';
+import { MdNoteAdd, MdOutlineArrowForwardIos, MdFilterListAlt, MdOutlineClose, MdSearch } from 'react-icons/md'
 
-const MySwal = withReactContent(Swal)
-
-const CreateNotes = () => {
-  const navigate = useNavigate()  
-  const titleRef = useRef()
-  const [notes, setNotes] = useState('')
-  const [tagDialog, setTagDialog] = useState(false)
-  const [selectedTags, setSelectedTags] = useState([])
-
-  const triggerTagDialog = () => {
-    setTagDialog(!tagDialog)
+const Notes = () => {
+  const navigate = useNavigate()
+  const mobile = useMediaQuery({ query: '(max-width: 768px)' })
+  const [modal, setModal] = useState(false)
+  const [searchBar, setSearchBar] = useState(false)
+  const triggerModal = () => {
+    setModal(!modal)
+  }
+  const triggerSearch = () => {
+    setSearchBar(!searchBar)
   }
 
-  const addNoteHandle = async () => {
-    const title = titleRef.current.value
-    const body = notes
-    try {
-      const response = await fetch('http://localhost:3100/api/notes', {
-        method: 'POST', 
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': localStorage.getItem('token')
-        },
-        body: JSON.stringify({
-          title,
-          body
-        })
-      })
-      if (response.status !== 200) {
-        const { errors } = await response.json()
-        throw new Error(errors)
+  const [noteList, setNoteList] = useState([])
+  const getNotes = async () => {
+    const response = await fetch('http://localhost:3100/api/notes', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': localStorage.getItem('token')
       }
-      navigate('/user/notes')
-    } catch (error) {
-      MySwal.fire({
-        title: <p>Failed to Save</p>,
-        text: error.message,
-        icon: 'error',
-        iconColor: 'var(--text-primary)',
-        color: 'var(--text-primary)',
-        confirmButtonColor: 'var(--text-primary)'
-      })
-    }
+    })
+    const { data } = await response.json()
+    setNoteList(data)
   }
+  useEffect(() => {
+    getNotes()
+  }, [])
+
   return (
-    <section className={createNoteStyle.container}>
-      { tagDialog && <TagModal triggerTagDialog={triggerTagDialog} selectedTags={selectedTags} setSelectedTags={setSelectedTags} />}
-      <div className={createNoteStyle.navbar}>
-        <div className={createNoteStyle.navigate} onClick={() => navigate('/user/notes')}>
-          <MdOutlineClose size={24}/>
-        </div> 
-        <div>
-          Create Note
-        </div> 
-        <div className={createNoteStyle.navigate} onClick={addNoteHandle}>
-          <MdOutlineCheck size={24}/>
+    <section className={notes.container}>
+      { modal && <div className={notes.shadow}></div> }
+      <div className={notes.navbar}>
+        { !mobile && <div className={notes.navigate}>
+          <span onClick={() => navigate('/user')}>Dashboard</span> <MdOutlineArrowForwardIos size={12} /> <span>Notes</span>
+        </div> }
+        { mobile ? 
+        (!searchBar && (<div className={notes.navigate}>
+          <span onClick={() => navigate('/user')}>Dashboard</span> <MdOutlineArrowForwardIos size={12} /> <span>Notes</span>
+        </div>)) : null 
+        }
+        <div className={notes.searchBar}>
+          { searchBar &&  (<Input inputName='keyword' inputType='text' placeholder='search notes by title here ...'/>) }
+          { searchBar && <button onClick={triggerSearch}><MdOutlineClose size={24} /> </button> }
+          { !searchBar && <button onClick={triggerSearch}><MdSearch size={24} /> </button> }
+          <button onClick={triggerModal}><MdFilterListAlt size={24} /></button>
         </div>
       </div>
-      <div className={createNoteStyle.noteEditor}>
-        <Input ref={titleRef} placeholder="Untitled" />
-        <div className={createNoteStyle.tagButton} onClick={triggerTagDialog}><BsTags /> Tag:</div>
-        <div className={createNoteStyle.tagsContainer}>
-          {selectedTags.map((item) => (
-            <div key={ item.id } className={ createNoteStyle.tag }>{ item.tagName }</div>
-          ))}
-        </div>
-        <TextEditor value={notes} onChange={setNotes} />
+      <div className={notes.sideBar}>
+        <ul>
+          <li>Notes</li>
+          <li>Tags</li>
+          <li>Account</li>
+          <li>Settings</li>
+        </ul>
+      </div>
+        { modal && <TagModal triggerModal={triggerModal} /> }
+      <div className={notes.noteWrapper}>
+        { noteList.map(note => (
+          <Card key={ note.id } id={ note.id } updatedAt={ note.updatedAt } createdAt={ note.createdAt } title={ note.title } body={ note.body } />
+        )) }
+      </div>
+      <div className={notes.buttonNav} onClick={() => navigate('/user/notes/add')}>
+        <MdNoteAdd size={20}/> Add new note
       </div>
     </section>
-  )
+  );
 }
  
-export default CreateNotes
+export default Notes;

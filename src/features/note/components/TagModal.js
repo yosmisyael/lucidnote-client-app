@@ -15,7 +15,7 @@ const TagModal = ({ triggerTagDialog, selectedTags, setSelectedTags }) => {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
-            Authorization: localStorage.getItem('token'),
+            'Authorization': localStorage.getItem('token'),
           },
         })
         if (response.status !== 200) {

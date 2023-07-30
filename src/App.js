@@ -1,8 +1,8 @@
 import Home from './pages/Home'
 import UserAuthentication from './pages/UserAuthentication'
-import Notes from './pages/Notes'
+import Notes from './features/note/index'
 import Dashboard from './pages/Dashboard'
-import CreateNotes from './features/note/index'
+import CreateNote from './features/note/pages/CreateNote'
 import TagsFeature from './features/tags'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import PrivateRoute from './routes/PrivateRoute'
@@ -22,7 +22,7 @@ function App() {
               <Route element={<PrivateRoute />}>
                 <Route path={'/user'} element={<Dashboard />} />
                 <Route path={'/user/notes'} element={<Notes />} />
-                <Route path={'/user/notes/add'} element={<CreateNotes />} />
+                <Route path={'/user/notes/add'} element={<CreateNote />} />
                 <Route path={'/user/tags'} element={<TagsFeature />} />
               </Route> 
           </Routes>
