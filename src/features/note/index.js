@@ -1,4 +1,4 @@
-import note from './assets/note.module.css'
+import createNoteStyle from './assets/note.module.css'
 import TextEditor from './components/TextEditor'
 import TagModal from './components/TagModal'
 import { Input } from '../../components/FormComponent'
@@ -12,15 +12,16 @@ import withReactContent from 'sweetalert2-react-content'
 const MySwal = withReactContent(Swal)
 
 const CreateNotes = () => {
-  const navigate = useNavigate()
-  
+  const navigate = useNavigate()  
+  const titleRef = useRef()
+  const [notes, setNotes] = useState('')
   const [tagDialog, setTagDialog] = useState(false)
-  
+  const [selectedTags, setSelectedTags] = useState([])
+
   const triggerTagDialog = () => {
     setTagDialog(!tagDialog)
   }
-  const titleRef = useRef()
-  const [notes, setNotes] = useState('')
+
   const addNoteHandle = async () => {
     const title = titleRef.current.value
     const body = notes
@@ -52,23 +53,29 @@ const CreateNotes = () => {
       })
     }
   }
+  console.log(selectedTags)
   return (
-    <section className={note.container}>
-      { tagDialog && <TagModal triggerTagDialog={triggerTagDialog}/>}
-      <div className={note.navbar}>
-        <div className={note.navigate} onClick={() => navigate('/user/notes')}>
+    <section className={createNoteStyle.container}>
+      { tagDialog && <TagModal triggerTagDialog={triggerTagDialog} selectedTags={selectedTags} setSelectedTags={setSelectedTags} />}
+      <div className={createNoteStyle.navbar}>
+        <div className={createNoteStyle.navigate} onClick={() => navigate('/user/notes')}>
           <MdOutlineClose size={24}/>
         </div> 
         <div>
           Create Note
         </div> 
-        <div className={note.navigate} onClick={addNoteHandle}>
+        <div className={createNoteStyle.navigate} onClick={addNoteHandle}>
           <MdOutlineCheck size={24}/>
         </div>
       </div>
-      <div className={note.noteEditor}>
+      <div className={createNoteStyle.noteEditor}>
         <Input ref={titleRef} placeholder="Untitled" />
-        <div className={note.tagButton} onClick={triggerTagDialog}><BsTags /> Tag:</div>
+        <div className={createNoteStyle.tagButton} onClick={triggerTagDialog}><BsTags /> Tag:</div>
+        <div className={createNoteStyle.tagsContainer}>
+          {selectedTags.map((item) => (
+            <div key={ item.id } className={ createNoteStyle.tag }>{ item.tagName }</div>
+          ))}
+        </div>
         <TextEditor value={notes} onChange={setNotes} />
       </div>
     </section>

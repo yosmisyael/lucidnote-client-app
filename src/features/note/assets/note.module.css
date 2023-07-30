@@ -39,6 +39,14 @@
 
 .container .noteEditor .tagsContainer {
   padding: 0rem 0 1rem 0;
+  display: flex;
+  gap: .5rem;
+}
+.container .noteEditor .tagsContainer .tag {
+  padding: .25rem;
+  background-color: var(--text-primary);
+  color: var(--primary-color);
+  border-radius: .5rem;
 }
 .container .navbar {
   position: fixed;
@@ -62,12 +70,11 @@
 
 .tagButton {
   display: flex;
-  gap: .3rem;
-  width: max-content;
+  gap: .5rem;
   padding: .5rem;
   align-items: center;
   cursor: pointer;
-  margin: 0 0 1rem 0;
+  margin: 0 0 .25rem 0;
 }
 
 @media screen and (max-width: 1024px) {
