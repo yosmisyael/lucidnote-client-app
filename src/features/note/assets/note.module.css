@@ -1,6 +1,3 @@
-  /* .container * {
-    border: 1px solid red;
-  } */
 ::selection {
   background-color: var(--text-primary) !important;
   color: var(--primary-color) !important;
@@ -36,7 +33,6 @@
 .container .noteEditor input:focus {
   outline: none;
 }
-
 .container .noteEditor .tagsContainer {
   padding: 0rem 0 1rem 0;
   display: flex;
@@ -46,7 +42,7 @@
   padding: .25rem;
   background-color: var(--text-primary);
   color: var(--primary-color);
-  border-radius: .5rem;
+  border-radius: .4rem;
 }
 .container .navbar {
   position: fixed;
@@ -67,7 +63,6 @@
   background-origin: var(--secondary-color);
   cursor: pointer;
 }
-
 .tagButton {
   display: flex;
   gap: .5rem;
@@ -79,13 +74,12 @@
 
 @media screen and (max-width: 1024px) {
   .container .noteEditor {
-    width: 100%;
+    max-width: 100%;
     background-color: var(--primary-color);
-    padding: 0;
+    padding: 1rem;
   }
   .container .noteEditor input {
-    padding: .5rem;
-    font-size: 2rem;
+    font-size: 1.7rem;
   }
   .container .navbar {
     padding: .6rem 2rem;

@@ -7,7 +7,7 @@ export default function TextEditor() {
   const wrapperRef = useCallback(wrapper => {
     const options = {
       theme: "snow",
-      placeholder: "write your note here"
+      placeholder: "write your note here",
     }
     if (wrapper == null) return
     wrapper.innerHTML = ""

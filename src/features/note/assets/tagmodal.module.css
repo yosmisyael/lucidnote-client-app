@@ -1,3 +1,14 @@
+::-webkit-scrollbar {
+  width: .25rem;
+}
+::-webkit-scrollbar-track {
+  background: var(--secondary-color);
+  border-radius: .5rem;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--text-primary);
+  border-radius: .5rem;
+}
 .tagDialog {
   z-index: 2;
   position: fixed;
@@ -6,22 +17,25 @@
   transform: translate(-50%, -50%);
   padding: 1rem;
   background-color: var(--primary-color);
-  max-width: 25rem;
+  min-width: 25rem;
   border: 1px solid var(--text-primary);
 }
 .tagDialog .header {
-  font-size: 3rem;
+  font-size: 2rem;
 }
 .tagDialog .body {
   display: flex;
-  gap: 1rem;
+  flex-direction: column;
+  align-items: flex-start;
+  height: 200px;
+  overflow-y: auto;
+  margin: .5rem .5rem 1rem .5rem;
 }
 .tagDialog .body .tagItem {
   display: flex;
-  align-items: center;
+  justify-content: center;
   gap: .5rem;
 }
-
 .tagDialog input, label {
   display: block;
   font-size: 1rem;
@@ -34,4 +48,10 @@
   display: flex;
   gap: 1rem;
   justify-content: flex-end;
+}
+
+@media screen and (max-width: 1024px) {
+  .tagDialog {
+    min-width: 20rem;
+  }
 }
