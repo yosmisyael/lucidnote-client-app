@@ -9,12 +9,12 @@ import { MdOutlineClose, MdOutlineCheck } from 'react-icons/md'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 
-const MySwal = withReactContent(Swal)
+const MySwal = withReactContent(Swal) 
 
 const CreateNote = () => {
   const navigate = useNavigate()  
   const titleRef = useRef()
-  const [notes, setNotes] = useState('')
+  const [quillContent, setQuillContent] = useState("")
   const [tagDialog, setTagDialog] = useState(false)
   const [selectedTags, setSelectedTags] = useState([])
 
@@ -22,36 +22,37 @@ const CreateNote = () => {
     setTagDialog(!tagDialog)
   }
 
-  const addNoteHandle = async () => {
-    const title = titleRef.current.value
-    const body = notes
-    try {
-      const response = await fetch('http://localhost:3100/api/notes', {
-        method: 'POST', 
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': localStorage.getItem('token')
-        },
-        body: JSON.stringify({
-          title,
-          body
-        })
-      })
-      if (response.status !== 200) {
-        const { errors } = await response.json()
-        throw new Error(errors)
-      }
-      navigate('/user/notes')
-    } catch (error) {
-      MySwal.fire({
-        title: <p>Failed to Save</p>,
-        text: error.message,
-        icon: 'error',
-        iconColor: 'var(--text-primary)',
-        color: 'var(--text-primary)',
-        confirmButtonColor: 'var(--text-primary)'
-      })
-    }
+  const addNote = async () => {
+    const title = titleRef.current.value || "Untitled"
+    const body = quillContent
+    console.log({title, body})
+    // try {
+    //   const response = await fetch('http://localhost:3100/api/notes', {
+    //     method: 'POST', 
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //       'Authorization': localStorage.getItem('token')
+    //     },
+    //     body: JSON.stringify({
+    //       title,
+    //       body
+    //     })
+    //   })
+    //   if (response.status !== 200) {
+    //     const { errors } = await response.json()
+    //     throw new Error(errors)
+    //   }
+    //   navigate('/user/notes')
+    // } catch (error) {
+    //   MySwal.fire({
+    //     title: <p>Failed to Save</p>,
+    //     text: error.message,
+    //     icon: 'error',
+    //     iconColor: 'var(--text-primary)',
+    //     color: 'var(--text-primary)',
+    //     confirmButtonColor: 'var(--text-primary)'
+    //   })
+    // }
   }
   return (
     <section className={createNoteStyle.container}>
@@ -63,7 +64,7 @@ const CreateNote = () => {
         <div>
           Create Note
         </div> 
-        <div className={createNoteStyle.navigate} onClick={addNoteHandle}>
+        <div className={createNoteStyle.navigate} onClick={addNote}>
           <MdOutlineCheck size={24}/>
         </div>
       </div>
@@ -75,7 +76,7 @@ const CreateNote = () => {
             <div key={ item.id } className={ createNoteStyle.tag }>{ item.tagName }</div>
           ))}
         </div>
-        <TextEditor value={notes} onChange={setNotes} />
+        <TextEditor quillContent={quillContent} setQuillContent={setQuillContent} />
       </div>
     </section>
   )
