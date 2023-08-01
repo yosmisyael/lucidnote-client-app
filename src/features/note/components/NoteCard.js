@@ -1,12 +1,12 @@
-import { useEffect, useState } from 'react';
-import  cardStyle from '../assets/styles/card.module.css';
+import { useEffect, useState } from 'react'
+import  cardStyle from '../assets/card.module.css'
 
 const Card = ({ id, updatedAt, createdAt, title, body }) => {
+  const [tags, setTags] = useState([])
   const timeConverter = (unixTime) => {
     return new Date(unixTime).toLocaleDateString()
   }
 
-  const [tags, setTags] = useState([])
   const getAttachedTags = async () => {
     const response = await fetch(`http://localhost:3100/api/notes/${id}/tags/`, {
       method: 'GET',
@@ -34,8 +34,7 @@ const Card = ({ id, updatedAt, createdAt, title, body }) => {
         </div>
         ) }
       </div>
-      <div className={cardStyle.cardBody}>
-      </div>
+      <div className={cardStyle.cardBody} dangerouslySetInnerHTML={{ __html: body }}></div>
       <div className={cardStyle.cardFooter}>
         <i>created at { timeConverter(createdAt) } </i>
       </div>

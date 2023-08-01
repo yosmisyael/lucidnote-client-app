@@ -1,4 +1,4 @@
-import createNoteStyle from '../assets/note.module.css'
+import createNoteStyle from '../assets/createNote.module.css'
 import TextEditor from '../components/TextEditor'
 import TagModal from '../components/TagModal'
 import { Input } from 'src/components/FormComponent'

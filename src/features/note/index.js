@@ -1,10 +1,10 @@
-import { useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import { useMediaQuery } from 'react-responsive';
-import { Input } from 'src/components/FormComponent';
-import Card from 'src/components/Card';
-import notes from 'src/assets/styles/notes.module.css';
-import TagModal from 'src/components/Modals';
+import { useNavigate } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { useMediaQuery } from 'react-responsive'
+import { Input } from 'src/components/FormComponent'
+import Card from './components/NoteCard'
+import notes from './assets/index.module.css'
+import TagModal from 'src/components/Modals'
 import { MdNoteAdd, MdOutlineArrowForwardIos, MdFilterListAlt, MdOutlineClose, MdSearch } from 'react-icons/md'
 
 const Notes = () => {
@@ -34,7 +34,7 @@ const Notes = () => {
   useEffect(() => {
     getNotes()
   }, [])
-
+  console.log(noteList)
   return (
     <section className={notes.container}>
       { modal && <div className={notes.shadow}></div> }
@@ -54,15 +54,7 @@ const Notes = () => {
           <button onClick={triggerModal}><MdFilterListAlt size={24} /></button>
         </div>
       </div>
-      <div className={notes.sideBar}>
-        <ul>
-          <li>Notes</li>
-          <li>Tags</li>
-          <li>Account</li>
-          <li>Settings</li>
-        </ul>
-      </div>
-        { modal && <TagModal triggerModal={triggerModal} /> }
+      { modal && <TagModal triggerModal={triggerModal} /> }
       <div className={notes.noteWrapper}>
         { noteList.map(note => (
           <Card key={ note.id } id={ note.id } updatedAt={ note.updatedAt } createdAt={ note.createdAt } title={ note.title } body={ note.body } />
@@ -72,7 +64,7 @@ const Notes = () => {
         <MdNoteAdd size={20}/> Add new note
       </div>
     </section>
-  );
+  )
 }
  
-export default Notes;
+export default Notes
