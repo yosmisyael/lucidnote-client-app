@@ -25,34 +25,51 @@ const CreateNote = () => {
   const addNote = async () => {
     const title = titleRef.current.value || "Untitled"
     const body = quillContent
-    console.log({title, body})
-    // try {
-    //   const response = await fetch('http://localhost:3100/api/notes', {
-    //     method: 'POST', 
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //       'Authorization': localStorage.getItem('token')
-    //     },
-    //     body: JSON.stringify({
-    //       title,
-    //       body
-    //     })
-    //   })
-    //   if (response.status !== 200) {
-    //     const { errors } = await response.json()
-    //     throw new Error(errors)
-    //   }
-    //   navigate('/user/notes')
-    // } catch (error) {
-    //   MySwal.fire({
-    //     title: <p>Failed to Save</p>,
-    //     text: error.message,
-    //     icon: 'error',
-    //     iconColor: 'var(--text-primary)',
-    //     color: 'var(--text-primary)',
-    //     confirmButtonColor: 'var(--text-primary)'
-    //   })
-    // }
+    try {
+      const noteResponse = await fetch('http://localhost:3100/api/notes', {
+        method: 'POST', 
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': localStorage.getItem('token')
+        },
+        body: JSON.stringify({
+          title,
+          body
+        })
+      })
+      if (noteResponse.status !== 200) {
+        const { errors } = await noteResponse.json()
+        throw new Error(errors)
+      }
+    const { data } = await noteResponse.json()
+    if (selectedTags.length !== 0) {
+      const selectedTag = selectedTags.map((tag) => tag.id)
+      const tagResponse = await fetch(`http://localhost:3100/api/notes/${data.id}/tags`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": localStorage.getItem("token")
+        },
+        body: JSON.stringify({
+          selectedTag 
+        })
+      }) 
+      if (tagResponse.status !== 200) {
+        const { errors } = await tagResponse.json()
+        throw new Error(errors)
+      }
+    }
+    navigate('/user/notes')
+    } catch (error) {
+      MySwal.fire({
+        title: <p>Failed to Save</p>,
+        text: error.message,
+        icon: 'error',
+        iconColor: 'var(--text-primary)',
+        color: 'var(--text-primary)',
+        confirmButtonColor: 'var(--text-primary)'
+      })
+    }
   }
   return (
     <section className={createNoteStyle.container}>
@@ -76,7 +93,7 @@ const CreateNote = () => {
             <div key={ item.id } className={ createNoteStyle.tag }>{ item.tagName }</div>
           ))}
         </div>
-        <TextEditor quillContent={quillContent} setQuillContent={setQuillContent} />
+        <TextEditor quillContent={quillContent} setQuillContent={setQuillContent}/>
       </div>
     </section>
   )
