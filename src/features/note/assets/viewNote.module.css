@@ -4,5 +4,33 @@
 }
 .navbar {
   position: fixed;
+  top: 0;
   width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--primary-color);
+  box-shadow: 0 .1rem .2rem var(--secondary-color);
+  padding: .6rem 3.5rem;
+  z-index: 2;
+}
+.navbarComponent {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+.navbarComponent:hover {
+  cursor: pointer;
+}
+.wrapper {
+  padding: 2rem;
+}
+.header {
+  margin-top: 4rem;
+  font-size: 2rem;
+}
+.tagsContainer {
+  margin: 2rem 0;
+  display: flex;
+  gap: .5rem;
 }

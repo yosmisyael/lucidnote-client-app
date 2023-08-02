@@ -1,11 +1,14 @@
 import { useEffect, useState } from 'react'
 import  cardStyle from '../assets/card.module.css'
+import { useNavigate } from 'react-router-dom'
 
 const Card = ({ id, updatedAt, createdAt, title, body }) => {
   const [tags, setTags] = useState([])
   const timeConverter = (unixTime) => {
     return new Date(unixTime).toLocaleDateString()
   }
+
+  const navigate = useNavigate()
 
   const getAttachedTags = async () => {
     const response = await fetch(`http://localhost:3100/api/notes/${id}/tags/`, {
@@ -22,7 +25,7 @@ const Card = ({ id, updatedAt, createdAt, title, body }) => {
     getAttachedTags()
   })
   return (
-    <div className={cardStyle.card}>
+    <div className={cardStyle.card} onClick={() => navigate(`/user/notes/${id}`)}>
       <div className={cardStyle.cardHeader}>
         <h2>{ timeConverter(updatedAt) }</h2>
         <h1>{ title }</h1>

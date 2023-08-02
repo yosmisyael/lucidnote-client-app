@@ -12,14 +12,16 @@ const Notes = () => {
   const mobile = useMediaQuery({ query: '(max-width: 768px)' })
   const [modal, setModal] = useState(false)
   const [searchBar, setSearchBar] = useState(false)
+  const [noteList, setNoteList] = useState([])
+
   const triggerModal = () => {
     setModal(!modal)
   }
+
   const triggerSearch = () => {
     setSearchBar(!searchBar)
   }
 
-  const [noteList, setNoteList] = useState([])
   const getNotes = async () => {
     const response = await fetch('http://localhost:3100/api/notes', {
       method: 'GET',
@@ -34,7 +36,6 @@ const Notes = () => {
   useEffect(() => {
     getNotes()
   }, [])
-  console.log(noteList)
   return (
     <section className={notes.container}>
       { modal && <div className={notes.shadow}></div> }
