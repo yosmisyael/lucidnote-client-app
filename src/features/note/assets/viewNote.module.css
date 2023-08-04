@@ -58,6 +58,9 @@
   margin-top: 4rem;
   font-size: 2rem;
 }
+.body {
+  padding: .75rem 0;
+}
 .tagsContainer {
   margin: 2rem 0;
   display: flex;

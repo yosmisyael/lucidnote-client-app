@@ -53,6 +53,9 @@ const ViewNote = () => {
           cancelButton: style.customCancelButton
         }
       }).then(async (result) => {
+        if (!result.isConfirmed) {
+          return;
+        }
         if (result.isConfirmed) {
           const response = await fetch(`http://localhost:3100/api/notes/${id}`, {
             method: 'DELETE',
@@ -75,7 +78,6 @@ const ViewNote = () => {
         }
         navigate("/user/notes")
       })
-
     } catch (error) {
       MySwal.fire({
         title: <p>Delete Note Failed</p>,
@@ -129,11 +131,11 @@ const ViewNote = () => {
         <div className={style.header}>
           <h1>{note.title}</h1>
         </div>
-        <div className={style.tagsContainer}>
-          { tagList.length > 0 && tagList.map(tag => (
+        { tagList.length !== 0 && (<div className={style.tagsContainer}>
+          {tagList.map(tag => (
             <div className={style.tag}> {tag} </div>
-          )) }
-        </div>
+          ))}
+        </div>) }
         <div className={style.body} dangerouslySetInnerHTML={{ __html: note.body }}></div>
       </div>
     </section>
