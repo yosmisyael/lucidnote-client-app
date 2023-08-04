@@ -69,3 +69,6 @@
   color: var(--primary-color);
   border-radius: .4rem;
 }
+.customCancelButton {
+  color: var(--text-primary) !important;
+}

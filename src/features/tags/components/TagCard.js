@@ -110,7 +110,7 @@ const TagCard = ({ id, tagName }) => {
 
     } catch (error) {
       MySwal.fire({
-        title: <p>Delete Tag Failder</p>,
+        title: <p>Delete Tag Failed</p>,
         text: error.message,
         icon: 'error',
         iconColor: 'var(--text-primary)',

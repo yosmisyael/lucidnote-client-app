@@ -3,8 +3,11 @@ import { useNavigate } from "react-router-dom"
 import { MdOutlineArrowBackIos, MdMoreVert,  MdOutlineModeEdit } from "react-icons/md"
 import { BsTrash } from 'react-icons/bs'
 import { useCallback, useEffect, useState } from "react"
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 
 const ViewNote = () => {
+  const MySwal = withReactContent(Swal)
   const [note, setNote] = useState({})
   const [tagList, setTagList] = useState([])
   const [popUpMenu, setPopUpMenu] = useState(false)
@@ -34,6 +37,56 @@ const ViewNote = () => {
       navigate("/user/notes")
     }
   }, [id, navigate])   
+
+  const deleteNote = async () => {
+    try {
+      MySwal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        iconColor: 'var(--text-primary)',
+        showCancelButton: true,
+        confirmButtonColor: 'var(--text-primary)',
+        cancelButtonColor: 'var(--secondary-color)',
+        confirmButtonText: 'Delete',
+        customClass: {
+          cancelButton: style.customCancelButton
+        }
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          const response = await fetch(`http://localhost:3100/api/notes/${id}`, {
+            method: 'DELETE',
+            headers: {
+              'Authorization': localStorage.getItem('token')
+            }
+          })
+          if (response.status !== 200) {
+            const { errors } = await response.json()
+            throw new Error(errors)
+          }
+          MySwal.fire({
+            title: <p>Delete Note Success</p>,
+            text: 'Your note has been deleted.',
+            icon: 'success',
+            iconColor: 'var(--text-primary)',
+            color: 'var(--text-primary)',
+            confirmButtonColor: 'var(--text-primary)'
+          })
+        }
+        navigate("/user/notes")
+      })
+
+    } catch (error) {
+      MySwal.fire({
+        title: <p>Delete Note Failed</p>,
+        text: error.message,
+        icon: 'error',
+        iconColor: 'var(--text-primary)',
+        color: 'var(--text-primary)',
+        confirmButtonColor: 'var(--text-primary)'
+      })
+    }
+  }
 
   useEffect(() => {
     const getNoteById = async () => {
@@ -67,8 +120,8 @@ const ViewNote = () => {
         </span>
         { popUpMenu && (<div className={style.popUpMenu}>
           <ul>
-            <li><MdOutlineModeEdit size={20} /> Edit Note</li>
-            <li><BsTrash size={20} /> Delete</li>
+            <li onClick={() => navigate(`/user/notes/${id}/update`)}><MdOutlineModeEdit size={20} /> Edit Note</li>
+            <li onClick={deleteNote}><BsTrash size={20} /> Delete</li>
           </ul>
         </div>)}
       </div>
