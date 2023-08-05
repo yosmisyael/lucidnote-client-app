@@ -33,6 +33,7 @@ const Notes = () => {
     const { data } = await response.json()
     setNoteList(data)
   }
+
   useEffect(() => {
     getNotes()
   }, [])

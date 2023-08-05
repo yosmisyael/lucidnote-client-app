@@ -54,10 +54,10 @@
 
 .container .noteWrapper {
   position: relative;
-  padding: 5rem 1rem 0 1rem;
+  padding: 4rem .75rem 0 .75rem;
   width: 100%;
-  display: flex;
-  gap: 1rem;
+  display: block;
+  flex-wrap: wrap;
 }
 .container .shadow {
   min-height: 100vh;

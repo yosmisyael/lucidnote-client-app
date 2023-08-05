@@ -1,10 +1,11 @@
 .card {
-  max-width: 16rem;
-  border-top: .3rem solid var(--text-primary);
+  max-width: 100%;
+  border-left: .3rem solid var(--text-primary);
   border-top-left-radius: .2rem;
-  border-top-right-radius: .2rem;
-  padding: .5rem 1rem 1rem 1rem;
+  border-bottom-left-radius: .2rem;
+  padding: 1rem 2rem 1rem 2rem;
   box-shadow: .2rem .2rem .2rem var(--secondary-color);
+  margin: .6rem .3rem;
   transition: all 100ms;
 }
 .card:hover {
@@ -32,15 +33,17 @@
 .tag {
   display: flex;
   gap: .5rem;
-  background-color: var(--secondary-color);
+  background-color: var(--text-primary);
+  color: var(--primary-color);
   padding: .2rem .4rem;
   border-radius: .4rem;
   margin-bottom: 1rem;
+  font-size: .8rem;
 }
-
 .card .cardBody {
   font-size: 1rem;
   font-weight: 600;
+  padding: 0 .75rem;
 }
 .card .cardFooter {
   margin-top: 1.5rem;
