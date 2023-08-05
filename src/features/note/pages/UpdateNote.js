@@ -1,10 +1,10 @@
-import createNoteStyle from '../assets/createNote.module.css'
+import style from '../assets/createNote.module.css'
 import TextEditor from '../components/TextEditor'
 import TagModal from '../components/TagModal'
 import { Input } from 'src/components/FormComponent'
 import { BsTags } from 'react-icons/bs'
 import { useNavigate } from 'react-router-dom'
-import { useState, useRef } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { MdOutlineClose, MdOutlineCheck } from 'react-icons/md'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
@@ -13,57 +13,92 @@ const MySwal = withReactContent(Swal)
 
 const UpdateNote = () => {
   const navigate = useNavigate()  
-  const titleRef = useRef()
+  const [title, setTitle] = useState("")
   const [quillContent, setQuillContent] = useState("")
   const [tagDialog, setTagDialog] = useState(false)
   const [selectedTags, setSelectedTags] = useState([])
+  const pathname = window.location.pathname
+  const id = pathname.split('/')[3]
 
   const triggerTagDialog = () => {
     setTagDialog(!tagDialog)
   }
 
-  const addNote = async () => {
-    const title = titleRef.current.value || "Untitled"
-    const body = quillContent
+  const getPrevNote = useCallback(async () => {
     try {
-      const noteResponse = await fetch('http://localhost:3100/api/notes', {
-        method: 'POST', 
+      const response = await fetch(`http://localhost:3100/api/notes/${id}`, {
+        method: "GET",
         headers: {
-          'Content-Type': 'application/json',
-          'Authorization': localStorage.getItem('token')
+          "Authorization": localStorage.getItem("token"),
+          "Content-Type": "application/json"
+        }
+      })
+      if (response.status !== 200) {
+        const { error } = await response.json()
+        throw new Error(error)
+      }
+      const { data } = await response.json()
+      setQuillContent(data.body)
+      setTitle(data.title)
+    } catch (error) {
+      return error 
+    }
+  }, [id])
+
+  const getPrevTags = useCallback(async () => {
+    try {
+      const response = await fetch(`http://localhost:3100/api/notes/${id}/tags`, {
+        method: "GET",
+        headers: {
+          "Authorization": localStorage.getItem("token"),
+        },
+      })
+      if (response.status !== 200) {
+        const { error } = await response.json()
+        throw new Error(error)
+      }
+      const { data } = await response.json()
+      setSelectedTags(data)
+    } catch (error) {
+      return error
+    }
+  }, [id])
+ 
+  const updateNote = async () => {
+    try {
+      const response = await fetch(`http://localhost:3100/api/notes/${id}`, {
+        method: "PUT",
+        headers: {
+          "Authorization": localStorage.getItem("token"),
+          "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          title,
-          body
+          title, 
+          body: quillContent
         })
       })
-      if (noteResponse.status !== 200) {
-        const { errors } = await noteResponse.json()
-        throw new Error(errors)
+      if (response.status !== 200) {
+        const { error } = await response.json()
+        throw new Error(error)
       }
-    const { data } = await noteResponse.json()
-    if (selectedTags.length !== 0) {
-      const selectedTag = selectedTags.map((tag) => tag.id)
-      const tagResponse = await fetch(`http://localhost:3100/api/notes/${data.id}/tags`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": localStorage.getItem("token")
-        },
-        body: JSON.stringify({
-          selectedTag 
+      if (selectedTags.length !== 0) {
+        const attachedTags = selectedTags.map(({ id }) => id)
+        await fetch(`http://localhost:3100/api/notes/${id}/tags`, {
+          method: "PUT",
+          headers: {
+            "Authorization": localStorage.getItem("token"),
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            selectedTag: attachedTags
+          })
         })
-      }) 
-      if (tagResponse.status !== 200) {
-        const { errors } = await tagResponse.json()
-        throw new Error(errors)
       }
-    }
-    navigate('/user/notes')
+      navigate(`/user/notes/${id}`)
     } catch (error) {
       MySwal.fire({
-        title: <p>Failed to Save</p>,
-        text: error.message,
+        title: <p>Failed to update note</p>,
+        text: error,
         icon: 'error',
         iconColor: 'var(--text-primary)',
         color: 'var(--text-primary)',
@@ -71,29 +106,35 @@ const UpdateNote = () => {
       })
     }
   }
+
+  useEffect(() => {
+    getPrevNote()
+    getPrevTags()
+  }, [getPrevNote, getPrevTags])
+
   return (
-    <section className={createNoteStyle.container}>
+    <section className={style.container}>
       { tagDialog && <TagModal triggerTagDialog={triggerTagDialog} selectedTags={selectedTags} setSelectedTags={setSelectedTags} />}
-      <div className={createNoteStyle.navbar}>
-        <div className={createNoteStyle.navigate} onClick={() => navigate('/user/notes')}>
+      <div className={style.navbar}>
+        <div className={style.navigate} onClick={() => navigate('/user/notes')}>
           <MdOutlineClose size={24}/>
         </div> 
         <div>
           Create Note
         </div> 
-        <div className={createNoteStyle.navigate} onClick={addNote}>
-          <MdOutlineCheck size={24}/>
+        <div className={style.navigate} onClick={updateNote} >
+          <MdOutlineCheck size={24} />
         </div>
       </div>
-      <div className={createNoteStyle.noteEditor}>
-        <Input ref={titleRef} placeholder="Untitled" />
-        <div className={createNoteStyle.tagButton} onClick={triggerTagDialog}><BsTags /> Tag:</div>
-        <div className={createNoteStyle.tagsContainer}>
-          { selectedTags.map((item) => (
-            <div key={ item.id } className={ createNoteStyle.tag }>{ item.tagName }</div>
+      <div className={style.noteEditor}>
+        <Input value={title} onChange={(e) => setTitle(e.target.value)} />
+        <div className={style.tagButton} onClick={triggerTagDialog}><BsTags /> Tag:</div>
+        <div className={style.tagsContainer}>
+          { selectedTags.length !== 0 && selectedTags.map((item) => (
+            <div key={ item.id } className={ style.tag }>{ item.tagName }</div>
           )) }
         </div>
-        <TextEditor quillContent={quillContent} setQuillContent={setQuillContent}/>
+        <TextEditor quillContent={quillContent} setQuillContent={setQuillContent} />
       </div>
     </section>
   )

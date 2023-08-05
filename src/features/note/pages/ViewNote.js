@@ -123,7 +123,7 @@ const ViewNote = () => {
         { popUpMenu && (<div className={style.popUpMenu}>
           <ul>
             <li onClick={() => navigate(`/user/notes/${id}/update`)}><MdOutlineModeEdit size={20} /> Edit Note</li>
-            <li onClick={deleteNote}><BsTrash size={20} /> Delete</li>
+            <li onClick={deleteNote}><BsTrash size={20} />Delete</li>
           </ul>
         </div>)}
       </div>
@@ -133,7 +133,7 @@ const ViewNote = () => {
         </div>
         { tagList.length !== 0 && (<div className={style.tagsContainer}>
           {tagList.map(tag => (
-            <div className={style.tag}> {tag} </div>
+            <div key={tag.id} className={style.tag}> {tag.tagName} </div>
           ))}
         </div>) }
         <div className={style.body} dangerouslySetInnerHTML={{ __html: note.body }}></div>

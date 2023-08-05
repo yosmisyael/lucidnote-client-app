@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import  cardStyle from '../assets/card.module.css'
 import { useNavigate } from 'react-router-dom'
 
@@ -10,7 +10,7 @@ const Card = ({ id, updatedAt, createdAt, title, body }) => {
 
   const navigate = useNavigate()
 
-  const getAttachedTags = async () => {
+  const getAttachedTags = useCallback(async () => {
     const response = await fetch(`http://localhost:3100/api/notes/${id}/tags/`, {
       method: 'GET',
       headers: {
@@ -20,10 +20,11 @@ const Card = ({ id, updatedAt, createdAt, title, body }) => {
     })
     const { data } = await response.json()
     setTags(data)
-  }
+  }, [id])
+
   useEffect(() => {
     getAttachedTags()
-  })
+  }, [getAttachedTags])
   return (
     <div className={cardStyle.card} onClick={() => navigate(`/user/notes/${id}`)}>
       <div className={cardStyle.cardHeader}>
@@ -31,8 +32,8 @@ const Card = ({ id, updatedAt, createdAt, title, body }) => {
         <h1>{ title }</h1>
         { tags.length !== 0 && (
         <div className={cardStyle.tagsContainer}>
-          { tags.map((tag, index) => (
-            <div key={index} className={cardStyle.tag}>{ tag }</div>
+          { tags.map((tag) => (
+            <div key={tag.id} className={cardStyle.tag}>{ tag.tagName }</div>
           )) }
         </div>
         ) }
