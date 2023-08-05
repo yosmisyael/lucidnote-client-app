@@ -4,7 +4,7 @@ import { useContext, useEffect, useRef, useState } from 'react'
 import { AuthContext } from 'src/contexts/AuthContext'
 
 const TagModal = ({ triggerTagDialog, selectedTags, setSelectedTags }) => {
-  const user = useContext(AuthContext)
+  const { user } = useContext(AuthContext)
   const [tagList, setTagList] = useState([])
   const initialSelectedTagList = useRef([...selectedTags])
 
@@ -17,18 +17,20 @@ const TagModal = ({ triggerTagDialog, selectedTags, setSelectedTags }) => {
             'Content-Type': 'application/json',
             'Authorization': localStorage.getItem('token'),
           },
-        })
+        });
+  
         if (response.status !== 200) {
-          throw new Error('Failed to fetch data')
+          throw new Error('Failed to fetch data');
         }
-        const { data } = await response.json()
-        setTagList(data)
+  
+        const { data } = await response.json();
+        setTagList(data);
       } catch (error) {
-        console.error('Error fetching tags:', error)
+        console.error('Error fetching tags:', error);
       }
-    }
-    getAllTags()
-  }, [user.username])
+    };
+    getAllTags();
+  }, [user?.username]);
 
   const handleCheckboxChange = (tag) => {
     setSelectedTags((prevSelectedTags) => {

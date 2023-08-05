@@ -1,17 +1,21 @@
-import { Input } from 'src/components/FormComponent';
-import Button from 'src/components/Button';
-import formSignIn from '../assets/form.module.css';
-import { BsPerson, BsShieldLock, BsFillEyeFill, BsFillEyeSlashFill } from 'react-icons/bs';
-import { useState, useRef } from 'react';
-import login from 'src/api/login';
-import { useNavigate } from 'react-router-dom';
+import { Input } from 'src/components/FormComponent'
+import Button from 'src/components/Button'
+import formSignIn from '../assets/form.module.css'
+import { BsPerson, BsShieldLock, BsFillEyeFill, BsFillEyeSlashFill } from 'react-icons/bs'
+import { useState, useRef } from 'react'
+import login from 'src/api/login'
+import { useNavigate } from 'react-router-dom'
+import { useContext } from 'react'
+import { AuthContext } from 'src/contexts/AuthContext'
+import getUser from 'src/api/getUser'
 
 const SignIn = () => {
   const navigate = useNavigate()
+  const { setUser } = useContext(AuthContext)
 
-  const [passwordVisibility, setPasswordVisibility] = useState(false);
+  const [passwordVisibility, setPasswordVisibility] = useState(false)
   const showPassword = () => {
-    setPasswordVisibility(current => !current); 
+    setPasswordVisibility(current => !current) 
   }
 
   const [typed, setTyped] = useState()
@@ -30,11 +34,20 @@ const SignIn = () => {
     }
     try {
       const response = await login('http://localhost:3100/api/users/login', data)
-        if (response.status === 200) {
-          usernameRef.current.value = ''
-          passwordRef.current.value = ''
-          navigate('/user')
-        }                   
+      if (response.status === 200) {
+        usernameRef.current.value = ''
+        passwordRef.current.value = ''
+        navigate('/user')
+      }
+
+      getUser('http://localhost:3100/api/users/current')
+      .then((userData) => {
+        setUser(userData);
+      })
+      .catch((error) => {
+        console.error('Error fetching user data:', error);
+        setUser(null);
+      });
     } catch (error) {
       return error
     }
@@ -70,7 +83,7 @@ const SignIn = () => {
         </label> 
       </div>
     </form>
-  );
+  )
 }
  
-export default SignIn;
+export default SignIn
