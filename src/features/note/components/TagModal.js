@@ -54,8 +54,8 @@ const TagModal = ({ triggerTagDialog, selectedTags, setSelectedTags }) => {
   return (
     <div className={tagModal.tagDialog}>
       <div className={tagModal.header}>Tag List</div>
-      <div className={tagModal.body}>
-        {tagList.length > 0 ? (
+      <div className={tagModal.body} style={tagList.length === 0 ? { justifyContent: 'center', alignItems: 'center' } : { }} >
+        {tagList.length !== 0 ? (
           tagList.map(tag => (
             <div key={tag.id} className={tagModal.tagItem}>
               <input
