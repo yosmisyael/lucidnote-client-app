@@ -29,7 +29,7 @@ const TagModal = ({ triggerTagDialog, selectedTags, setSelectedTags }) => {
       }
     }
     getAllTags()
-  }, [user?.username])
+  }, [user.username])
 
   const handleCheckboxChange = (tag) => {
     setSelectedTags((prevSelectedTags) => {

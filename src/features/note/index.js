@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState, useRef, useCallback } from 'react'
 import { useMediaQuery } from 'react-responsive'
 import { Input } from 'src/components/FormComponent'
 import Card from './components/NoteCard'
@@ -11,30 +11,31 @@ const Notes = () => {
   const navigate = useNavigate()
   const mobile = useMediaQuery({ query: '(max-width: 768px)' })
   const searchBarRef = useRef(null)
-  const [tagDialog, setTagDialog] = useState(false)
+  const from = 'index'
   const [selectedTags, setSelectedTags] = useState([])
   const [searchBar, setSearchBar] = useState(false)
+  const [tagDialog, setTagDialog] = useState(false)
   const [noteList, setNoteList] = useState([])
   const [keyword, setKeyword] = useState('')
 
   const triggerTagDialog = () => {
     setTagDialog(!tagDialog)
-  }
-
-  const triggerSearch = () => {
-    setSearchBar(!searchBar)
-  }
-
-  const closeSearchBar = () => {
+    setSearchBar(false)
     setKeyword('')
-    setSearchBar(!searchBar)
   }
 
-  const handleChange = (e) => {
+  const triggerSearchBar = () => {
+    getNotes()
+    setSearchBar(!searchBar)
+    setTagDialog(false)
+    setSelectedTags([])
+  }
+
+  const getSearchKeyword = (e) => {
     setKeyword(e.target.value)
   }
 
-  const getNotes = async (title=undefined) => {
+  const getNotes = useCallback(async (title=undefined) => {
     const url = title ? `http://localhost:3100/api/notes?title=${title}` : 'http://localhost:3100/api/notes'
     const response = await fetch(url, {
       method: 'GET',
@@ -54,14 +55,37 @@ const Notes = () => {
     }
     const { data } = await response.json()
     setNoteList(data)
-  }
+  }, [])
 
   useEffect(() => {
-    getNotes(keyword)
+    getNotes()
+  }, [getNotes])
+  
+  useEffect(() => {
     if (searchBar) {
       searchBarRef.current.focus()
     }
-  }, [keyword, searchBar])
+    getNotes(keyword)
+  }, [keyword, searchBar, getNotes])
+
+  useEffect(() => {
+    const filterNotes = async (tags) => {
+      const response = await fetch('http://localhost:3100/api/notes/filter', {
+        method: 'POST',
+        headers: {
+          'Authorization': localStorage.getItem('token'),
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          filterTags: tags.map(({id}) => id)
+        })
+      })
+  
+      const { data } = await response.json()
+      setNoteList(data)
+    }
+    filterNotes(selectedTags)
+  }, [selectedTags])
 
   return (
     <section className={style.container}>
@@ -83,21 +107,22 @@ const Notes = () => {
               inputName='keyword'
               inputType='text'
               placeholder='search notes by title here ...'
-              onChange={handleChange}
+              onChange={getSearchKeyword}
               value={keyword}
               ref={searchBarRef}
             />
             )}
-          {searchBar && <button onClick={closeSearchBar}><MdOutlineClose size={24} /></button>}
-          {!searchBar && <button onClick={triggerSearch}><MdSearch size={24} /></button>}
+          {searchBar && <button onClick={triggerSearchBar}><MdOutlineClose size={24} /></button>}
+          {!searchBar && <button onClick={triggerSearchBar}><MdSearch size={24} /></button>}
           <button onClick={triggerTagDialog}><MdFilterListAlt size={24} /></button>
         </div>
       </div>
       {tagDialog && (
         <TagModal 
-          triggerTagDialog={triggerTagDialog} 
-          selectedTags={selectedTags} 
-          setSelectedTags={setSelectedTags} 
+          triggerTagDialog={triggerTagDialog}
+          selectedTags={selectedTags}
+          setSelectedTags={setSelectedTags}
+          from={from}
         />
       )}
       <div className={style.noteWrapper}>
@@ -111,7 +136,7 @@ const Notes = () => {
             </div>
           </div>
         )}
-        {noteList.map(note => (
+        {noteList && noteList.map(note => (
           <Card 
             key={note.id} 
             id={note.id} 
