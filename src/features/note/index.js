@@ -31,6 +31,12 @@ const Notes = () => {
     setSelectedTags([])
   }
 
+  const closeSearchBar = () => {
+    getNotes()
+    setSearchBar(false)
+    setKeyword('')
+  }
+  
   const getSearchKeyword = (e) => {
     setKeyword(e.target.value)
   }
@@ -112,7 +118,7 @@ const Notes = () => {
               ref={searchBarRef}
             />
             )}
-          {searchBar && <button onClick={triggerSearchBar}><MdOutlineClose size={24} /></button>}
+          {searchBar && <button onClick={closeSearchBar}><MdOutlineClose size={24} /></button>}
           {!searchBar && <button onClick={triggerSearchBar}><MdSearch size={24} /></button>}
           <button onClick={triggerTagDialog}><MdFilterListAlt size={24} /></button>
         </div>
