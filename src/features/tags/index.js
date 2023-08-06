@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import tags from './assets/tags.module.css'
+import style from './assets/tags.module.css'
 import TagModal from './components/tagModal'
 import TagCard from './components/TagCard'
 import { MdOutlineArrowForwardIos, MdAddHome } from 'react-icons/md'
@@ -30,19 +30,19 @@ const TagsFeature = () => {
   }, [tagList])
 
   return (
-    <section className={tags.container}>
-      <div className={tags.navbar}>
-        <div className={tags.navigate}>
+    <section className={style.container}>
+      <div className={style.navbar}>
+        <div className={style.navigate}>
           <span onClick={() => navigate('/user')} style={{cursor: 'pointer'}}>Dashboard</span> <MdOutlineArrowForwardIos size={12} /> <span style={{cursor: 'pointer'}}>Tag</span>
         </div>        
       </div>
-      <div className={tags.header}>
+      <div className={style.header}>
         <h1>Tag List <BsTags /></h1>
       </div>
       { tagList.map(tag => (
         <TagCard key={ tag.id } id={ tag.id } tagName={ tag.tagName }/>
       ))}
-      <div className={tags.btnAdd} onClick={handlerModal}> 
+      <div className={style.btnAdd} onClick={handlerModal}> 
         <MdAddHome size={24}/> Add Tag
       </div>
       { tagConfigurationModal && (<TagModal handlerModal={ handlerModal }/>) }

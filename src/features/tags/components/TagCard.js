@@ -1,6 +1,6 @@
 import { MdOutlineModeEdit, MdOutlineClose, MdOutlineCheck } from 'react-icons/md'
 import { BsTrash } from 'react-icons/bs'
-import tags from '../assets/tagCard.module.css'
+import style from '../assets/tagCard.module.css'
 import { useState, useRef, useEffect } from 'react'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
@@ -82,7 +82,7 @@ const TagCard = ({ id, tagName }) => {
         cancelButtonColor: 'var(--secondary-color)',
         confirmButtonText: 'Delete',
         customClass: {
-          cancelButton: tags.customCancelButton
+          cancelButton: style.customCancelButton
         }
       }).then(async (result) => {
         if (result.isConfirmed) {
@@ -121,10 +121,10 @@ const TagCard = ({ id, tagName }) => {
   }
 
   return (
-    <div className={tags.wrapper}>
-      <div className={tags.tagWrapper}>
+    <div className={style.wrapper}>
+      <div className={style.tagWrapper}>
         <input ref={inputTagRef} type="text" defaultValue={tagName} data-id={id} disabled={ editMode ? false : true } style={editMode ? {cursor: 'text'} : {cursor: 'pointer'}} />
-        <div className={tags.actionBtn}>
+        <div className={style.actionBtn}>
           { !editMode && (
             <span onClick={triggerEditMode}><MdOutlineModeEdit size={20}/></span>
           ) }
