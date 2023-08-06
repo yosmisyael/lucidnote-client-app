@@ -5,11 +5,39 @@ import { useNavigate } from 'react-router-dom'
 import { TfiAgenda } from 'react-icons/tfi'
 import { GoTasklist } from 'react-icons/go'
 import { BsTags, BsJournals } from 'react-icons/bs'
-import getUser from 'src/api/getUser'
-import { useState } from 'react'
 import logout from 'src/api/logout'
+import { useContext, useEffect } from 'react'
+import { AuthContext } from 'src/contexts/AuthContext'
 
 const Dashboard = () => {
+  const navigate = useNavigate()
+  const { user, setUser } = useContext(AuthContext)
+
+  useEffect(() => {
+    const getUserData = async () => {
+      try {
+        const response = await fetch('http://localhost:3100/api/users/current', {
+          method: 'GET',
+          headers: {
+            'Authorization': localStorage.getItem('token'),
+          }
+        })
+        const { data } = await response.json()
+        setUser(data)
+      } catch (error) {
+        setUser(null)
+      }
+    }
+
+    if (!user) {
+      getUserData()
+    }
+  }, [user, setUser])
+
+  if (!user) {
+    return <div>Loading...</div>
+  }
+
   const logoutHandler = async () => {
     logout('http://localhost:3100/api/users/logout')
       .then(response => {
@@ -18,7 +46,7 @@ const Dashboard = () => {
         }
       })
   }
-  const navigate = useNavigate()
+
   const getTime = () => {
     const time = new Date(Date.now()).getHours()
     switch (true) {
@@ -32,8 +60,7 @@ const Dashboard = () => {
         return 'morning'
     } 
   }
-  const [name, setName] = useState('')
-  getUser('http://localhost:3100/api/users/current').then(({ name }) => {setName(name)})
+
   return ( 
     <section className={dashboard.container}>
       <div className={dashboard.navbar}>
@@ -41,7 +68,7 @@ const Dashboard = () => {
           <Logo size={'3rem'}/>          
         </div>
         <div className={dashboard.text}>
-          <h3>Good {getTime()}, {name}! </h3>
+          <h3>Good {getTime()}, {user.username}! </h3>
         </div>
         <div>
           <Button buttonName='Logout' buttonType='default' func={logoutHandler} />

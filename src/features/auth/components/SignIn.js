@@ -5,13 +5,9 @@ import { BsPerson, BsShieldLock, BsFillEyeFill, BsFillEyeSlashFill } from 'react
 import { useState, useRef } from 'react'
 import login from 'src/api/login'
 import { useNavigate } from 'react-router-dom'
-import { useContext } from 'react'
-import { AuthContext } from 'src/contexts/AuthContext'
-import getUser from 'src/api/getUser'
 
 const SignIn = () => {
   const navigate = useNavigate()
-  const { setUser } = useContext(AuthContext)
 
   const [passwordVisibility, setPasswordVisibility] = useState(false)
   const showPassword = () => {
@@ -39,15 +35,6 @@ const SignIn = () => {
         passwordRef.current.value = ''
         navigate('/user')
       }
-
-      getUser('http://localhost:3100/api/users/current')
-      .then((userData) => {
-        setUser(userData);
-      })
-      .catch((error) => {
-        console.error('Error fetching user data:', error);
-        setUser(null);
-      });
     } catch (error) {
       return error
     }
