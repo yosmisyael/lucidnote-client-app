@@ -1,4 +1,4 @@
-import createNoteStyle from '../assets/createNote.module.css'
+import style from '../assets/createNote.module.css'
 import TextEditor from '../components/TextEditor'
 import TagModal from '../components/TagModal'
 import { Input } from 'src/components/FormComponent'
@@ -72,25 +72,25 @@ const CreateNote = () => {
     }
   }
   return (
-    <section className={createNoteStyle.container}>
+    <section className={style.container}>
       { tagDialog && <TagModal triggerTagDialog={triggerTagDialog} selectedTags={selectedTags} setSelectedTags={setSelectedTags} />}
-      <div className={createNoteStyle.navbar}>
-        <div className={createNoteStyle.navigate} onClick={() => navigate('/user/notes')}>
+      <div className={style.navbar}>
+        <div className={style.navigate} onClick={() => navigate('/user/notes')}>
           <MdOutlineClose size={24}/>
         </div> 
         <div>
           Create Note
         </div> 
-        <div className={createNoteStyle.navigate} onClick={addNote}>
+        <div className={style.navigate} onClick={addNote}>
           <MdOutlineCheck size={24}/>
         </div>
       </div>
-      <div className={createNoteStyle.noteEditor}>
+      <div className={style.noteEditor}>
         <Input ref={titleRef} placeholder="Untitled" />
-        <div className={createNoteStyle.tagButton} onClick={triggerTagDialog}><BsTags /> Tag:</div>
-        <div className={createNoteStyle.tagsContainer}>
+        <div className={style.tagButton} onClick={triggerTagDialog}><BsTags /> Tag:</div>
+        <div className={style.tagsContainer}>
           {selectedTags.map((item) => (
-            <div key={ item.id } className={ createNoteStyle.tag }>{ item.tagName }</div>
+            <div key={ item.id } className={ style.tag }>{ item.tagName }</div>
           ))}
         </div>
         <TextEditor quillContent={quillContent} setQuillContent={setQuillContent}/>

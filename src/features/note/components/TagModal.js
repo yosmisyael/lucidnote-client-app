@@ -1,4 +1,4 @@
-import tagModal from '../assets/tagModal.module.css'
+import style from '../assets/tagModal.module.css'
 import Button from 'src/components/Button'
 import { useContext, useEffect, useRef, useState } from 'react'
 import { AuthContext } from 'src/contexts/AuthContext'
@@ -51,12 +51,12 @@ const TagModal = ({ triggerTagDialog, selectedTags, setSelectedTags }) => {
   }
 
   return (
-    <div className={tagModal.tagDialog}>
-      <div className={tagModal.header}>Tag List</div>
-      <div className={tagModal.body} style={tagList.length === 0 ? { justifyContent: 'center', alignItems: 'center' } : { }} >
+    <div className={style.tagDialog}>
+      <div className={style.header}>Tag List</div>
+      <div className={style.body} style={tagList.length === 0 ? { justifyContent: 'center', alignItems: 'center' } : { }} >
         {tagList.length !== 0 ? (
           tagList.map(tag => (
-            <div key={tag.id} className={tagModal.tagItem}>
+            <div key={tag.id} className={style.tagItem}>
               <input
                 type="checkbox"
                 name={tag.tagName}
@@ -71,7 +71,7 @@ const TagModal = ({ triggerTagDialog, selectedTags, setSelectedTags }) => {
           <p>No tag found</p>
         )}
       </div>
-      <div className={tagModal.footer}>
+      <div className={style.footer}>
         <Button buttonName="cancel" buttonType="default" func={handleCancelButton} />
         <Button buttonName="submit" buttonType="primary" func={handleAddTagButton} />
       </div>
