@@ -7,7 +7,6 @@ const TagModal = ({ triggerTagDialog, selectedTags, setSelectedTags }) => {
   const { user } = useContext(AuthContext)
   const [tagList, setTagList] = useState([])
   const initialSelectedTagList = useRef([...selectedTags])
-
   useEffect(() => {
     const getAllTags = async () => {
       try {
@@ -17,20 +16,20 @@ const TagModal = ({ triggerTagDialog, selectedTags, setSelectedTags }) => {
             'Content-Type': 'application/json',
             'Authorization': localStorage.getItem('token'),
           },
-        });
+        })
   
         if (response.status !== 200) {
-          throw new Error('Failed to fetch data');
+          throw new Error('Failed to fetch data')
         }
   
-        const { data } = await response.json();
-        setTagList(data);
+        const { data } = await response.json()
+        setTagList(data)
       } catch (error) {
-        console.error('Error fetching tags:', error);
+        return error;
       }
-    };
-    getAllTags();
-  }, [user?.username]);
+    }
+    getAllTags()
+  }, [user?.username])
 
   const handleCheckboxChange = (tag) => {
     setSelectedTags((prevSelectedTags) => {
@@ -74,7 +73,7 @@ const TagModal = ({ triggerTagDialog, selectedTags, setSelectedTags }) => {
       </div>
       <div className={tagModal.footer}>
         <Button buttonName="cancel" buttonType="default" func={handleCancelButton} />
-        <Button buttonName="add" buttonType="primary" func={handleAddTagButton} />
+        <Button buttonName="submit" buttonType="primary" func={handleAddTagButton} />
       </div>
     </div>
   )

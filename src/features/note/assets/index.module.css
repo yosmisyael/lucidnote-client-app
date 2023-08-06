@@ -37,7 +37,6 @@
 .container .navbar .navigate:hover {
   cursor: pointer;
 }
-
 .container .buttonNav {
   position: fixed;
   display: flex;
@@ -51,7 +50,6 @@
   background-color: var(--text-primary);
   color: var(--primary-color);
 }
-
 .container .noteWrapper {
   position: relative;
   padding: 4rem .75rem 0 .75rem;
@@ -59,15 +57,20 @@
   display: block;
   flex-wrap: wrap;
 }
-.container .shadow {
-  min-height: 100vh;
-  width: 100%;
-  background-color: var(--text-primary);
-  position: fixed;
-  z-index: 1;
-  opacity: .4;
+.filterWrapper h3 {
+  margin-bottom: .5rem;
 }
-
+.tagContainer {
+  padding: 0rem 0 1rem 0;
+  display: flex;
+  gap: .5rem;
+}
+.tag {
+  padding: .25rem;
+  background-color: var(--text-primary);
+  color: var(--primary-color);
+  border-radius: .4rem;
+}
 @media screen and (max-width: 1024px) {
   .container .navbar {
     padding: .6rem 2rem;
