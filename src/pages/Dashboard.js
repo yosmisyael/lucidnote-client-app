@@ -28,14 +28,19 @@ const Dashboard = () => {
         setUser(null)
       }
     }
-
     if (!user) {
       getUserData()
     }
   }, [user, setUser])
-
+  
   if (!user) {
-    return <div>Loading...</div>
+    return <section className={dashboard.container} style={{
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center'
+    }}>
+      <span className={dashboard.loader}></span>
+    </section>
   }
 
   const logoutHandler = async () => {
