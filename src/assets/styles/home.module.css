@@ -12,6 +12,7 @@
   min-height: 100vh;
   width: 100%;
   display: flex;
+  flex-wrap: wrap;
   margin: auto;
   padding: 4rem 2rem 0 2rem;
   background-color: var(--primary-color);
@@ -20,33 +21,38 @@
   overflow: hidden;
 }
 .canvas h1 {
-  font-size: 4rem;
+  font-size: 2.8rem;
   font-weight: 700;
-  margin: 2rem;
+  margin: 2rem 0 1rem 0;
+  text-align: center;
 }
 .canvas p {
-  text-align: left;
+  text-align: center;
   display: block;
-  max-width: 45ch;
-  margin-left: 2rem;
-  font-size: 1.3rem;
+  max-width: 30ch;
+  font-size: 1.2rem;
   font-weight: 500;
+  margin: 0 1rem 0 1rem;
 }
 .canvas .col1 {
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
   flex-direction: column;
   z-index: 1;
+  width: 100%;
 }
 .canvas .col2 {
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
+}
+.homepageIcon {
+  height: 24rem;
 }
 .btnWrapper {
-  margin: 2rem;
-  gap: .6rem;
+  margin: 1.2rem 0;
 }
 .holeContainer {
   display: flex;
@@ -78,26 +84,68 @@
   background-position: top;
   border-bottom: 1px solid var(--text-primary);
 }
-@media (max-width: 1024px) {
-  .canvas {
-    flex-wrap: wrap;
-  }
+
+@media only screen and (min-width: 768px) {
   .canvas h1 {
-    font-size: 2.7rem;
-    text-align: center;
+    font-size: 3.2rem;
+    max-width: 22ch;
   }
   .canvas p {
     font-size: 1.4rem;
-    text-align: center;
   }
   .canvas .col1 {
-    align-items: center;
+    display: flex;
   }
-  .canvas .col2 img {
-    height: 21rem;
+  .homepageIcon {
+    height: 32rem;
   }
-
 }
+
+@media only screen and (min-width: 1024px) {
+  .canvas {
+    flex-wrap: nowrap;
+  }
+  .canvas h1 {
+    font-size: 4.4rem;
+    max-width: 22ch;
+    text-align: left;
+  }
+  .canvas p {
+    font-size: 1.5rem;
+    text-align: left;
+    margin: 0;
+  }
+  .canvas .col1 {
+    display: flex;
+    margin-left: 2.4rem;
+    align-items: flex-start;
+  }
+  .homepageIcon {
+    height: 38rem;
+  }
+}
+
+@media only screen and (min-width: 1280px) {
+  .canvas h1 {
+    font-size: 5.5rem;
+    max-width: 22ch;
+    text-align: left;
+  }
+  .canvas p {
+    font-size: 1.6rem;
+    text-align: left;
+    margin: 0;
+  }
+  .canvas .col1 {
+    display: flex;
+    margin-left: 2.4rem;
+    align-items: flex-start;
+  }
+  .homepageIcon {
+    height: 45rem;
+  }
+}
+
 @keyframes bounce {
   0% {
     transform: translateY(0);
