@@ -6,9 +6,12 @@ import { AuthContext } from 'src/contexts/AuthContext'
 const TagModal = ({ triggerTagDialog, selectedTags, setSelectedTags }) => {
   const { user } = useContext(AuthContext)
   const [tagList, setTagList] = useState([])
+  const [loader, setLoader] = useState(false)
   const initialSelectedTagList = useRef([...selectedTags])
+  
   useEffect(() => {
     const getAllTags = async () => {
+      setLoader(true)
       try {
         const response = await fetch(`http://localhost:3100/api/tags/${user.username}`, {
           method: 'GET',
@@ -24,6 +27,7 @@ const TagModal = ({ triggerTagDialog, selectedTags, setSelectedTags }) => {
   
         const { data } = await response.json()
         setTagList(data)
+        setLoader(false)
       } catch (error) {
         return error;
       }
@@ -54,6 +58,7 @@ const TagModal = ({ triggerTagDialog, selectedTags, setSelectedTags }) => {
     <div className={style.tagDialog}>
       <div className={style.header}>Tag List</div>
       <div className={style.body} style={tagList.length === 0 ? { justifyContent: 'center', alignItems: 'center' } : { }} >
+        {loader && <span className={style.loader}></span>}
         {tagList.length !== 0 ? (
           tagList.map(tag => (
             <div key={tag.id} className={style.tagItem}>

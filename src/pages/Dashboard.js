@@ -1,17 +1,24 @@
 import Logo from 'src/components/Logo'
 import Button from 'src/components/Button'
-import dashboard from '../assets/styles/dashboard.module.css'
+import style from '../assets/styles/dashboard.module.css'
 import { useNavigate } from 'react-router-dom'
 import { TfiAgenda } from 'react-icons/tfi'
 import { GoTasklist } from 'react-icons/go'
 import { BsTags, BsJournals } from 'react-icons/bs'
 import logout from 'src/api/logout'
-import { useContext, useEffect } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { AuthContext } from 'src/contexts/AuthContext'
 
 const Dashboard = () => {
   const navigate = useNavigate()
   const { user, setUser } = useContext(AuthContext)
+  const [loader, setLoader] = useState(false)
+
+  const customStyle = {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
 
   useEffect(() => {
     const getUserData = async () => {
@@ -34,19 +41,19 @@ const Dashboard = () => {
   }, [user, setUser])
   
   if (!user) {
-    return <section className={dashboard.container} style={{
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center'
-    }}>
-      <span className={dashboard.loader}></span>
+    return (
+    <section className={style.container} style={customStyle}>
+      <span className={style.loader}></span>
     </section>
+    )
   }
 
   const logoutHandler = async () => {
+    setLoader(true)
     logout('http://localhost:3100/api/users/logout')
       .then(response => {
         if (response.data === 'OK') {
+          setLoader(false)
           navigate('/')
         }
       })
@@ -67,32 +74,33 @@ const Dashboard = () => {
   }
 
   return ( 
-    <section className={dashboard.container}>
-      <div className={dashboard.navbar}>
+    <section className={style.container} style={loader ? customStyle : {}}>
+      <div className={style.navbar}>
         <div style={{cursor: 'pointer'}} onClick={() => navigate('/')}>
           <Logo size={'3rem'}/>          
         </div>
-        <div className={dashboard.text}>
+        <div className={style.text}>
           <h3>Good {getTime()}, {user.username}! </h3>
         </div>
         <div>
           <Button buttonName='Logout' buttonType='default' func={logoutHandler} />
         </div>
       </div>
-      <div className={dashboard.wrapper}>
-        <div className={dashboard.feature} onClick={() => navigate('/user/notes')}>
+      <div className={style.wrapper}>
+        <div className={style.feature} onClick={() => navigate('/user/notes')}>
           <BsJournals size={100} /> <h2> Note </h2>
         </div>
-        <div className={dashboard.feature} onClick={() => navigate('/user/tags')}>
+        <div className={style.feature} onClick={() => navigate('/user/tags')}>
           <BsTags size={100} /> <h2>Tag</h2>
         </div>
-        <div className={dashboard.feature}>
+        <div className={style.feature}>
           <GoTasklist size={100} /> <h2>To Do</h2>
         </div>
-        <div className={dashboard.feature}>
+        <div className={style.feature}>
           <TfiAgenda size={100} /> <h2>Journal</h2>
         </div>
       </div>      
+      {loader && <span className={style.loader}></span>}
     </section>
   )
 }

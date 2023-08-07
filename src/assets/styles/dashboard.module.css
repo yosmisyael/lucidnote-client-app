@@ -64,7 +64,6 @@
   box-sizing: border-box;
   animation: animloader 0.3s 0.3s linear infinite alternate;
 }
-
 .loader::after, .loader::before {
   content: '';
   width: 8px;
