@@ -13,7 +13,7 @@ const Dashboard = () => {
   const navigate = useNavigate()
   const { user, setUser } = useContext(AuthContext)
   const [loader, setLoader] = useState(false)
-
+  
   const customStyle = {
     display: 'flex',
     justifyContent: 'center',
@@ -54,6 +54,7 @@ const Dashboard = () => {
       .then(response => {
         if (response.data === 'OK') {
           setLoader(false)
+          setUser(null)
           navigate('/')
         }
       })
