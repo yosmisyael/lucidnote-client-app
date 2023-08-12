@@ -10,6 +10,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import PrivateRoute from './routes/PrivateRoute'
 import GuestRoute from './routes/GuestRoute'
 import { AuthProvider } from './contexts/AuthContext'
+import NotFound from './pages/NotFound'
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
                 <Route path={'/user/notes/:id/update'} element={<UpdateNote />} />
                 <Route path={'/user/tags'} element={<TagsFeature />} />
               </Route> 
+            <Route path='*' element={<NotFound />} />
           </Routes>
         </div>
       </AuthProvider>
