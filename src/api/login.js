@@ -1,7 +1,4 @@
-import Swal from 'sweetalert2'
-import withReactContent from 'sweetalert2-react-content'
-
-const MySwal = withReactContent(Swal)
+import Flasher from 'src/components/Flasher'
 
 const login = async (url, data) => {
   try {
@@ -21,14 +18,7 @@ const login = async (url, data) => {
     localStorage.setItem('token', token)
     return { status: response.status }
   } catch (error) {
-    MySwal.fire({
-      title: <p>Login Failed</p>,
-      text: error.message,
-      icon: 'error',
-      iconColor: 'var(--text-primary)',
-      color: 'var(--text-primary)',
-      confirmButtonColor: 'var(--text-primary)'
-    })
+    Flasher('failed', 'Register Failed', error.message)
   }
 }
 

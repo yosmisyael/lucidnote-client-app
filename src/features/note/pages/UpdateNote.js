@@ -6,10 +6,7 @@ import { BsTags } from 'react-icons/bs'
 import { useNavigate } from 'react-router-dom'
 import { useState, useEffect, useCallback } from 'react'
 import { MdOutlineClose, MdOutlineCheck } from 'react-icons/md'
-import Swal from 'sweetalert2'
-import withReactContent from 'sweetalert2-react-content'
-
-const MySwal = withReactContent(Swal) 
+import Flasher from 'src/components/Flasher'
 
 const UpdateNote = () => {
   const navigate = useNavigate()  
@@ -77,10 +74,12 @@ const UpdateNote = () => {
           body: quillContent
         })
       })
+
       if (response.status !== 200) {
         const { error } = await response.json()
         throw new Error(error)
       }
+      
       if (selectedTags.length !== 0) {
         const attachedTags = selectedTags.map(({ id }) => id)
         await fetch(`http://localhost:3100/api/notes/${id}/tags`, {
@@ -96,14 +95,7 @@ const UpdateNote = () => {
       }
       navigate(`/user/notes/${id}`)
     } catch (error) {
-      MySwal.fire({
-        title: <p>Failed to update note</p>,
-        text: error,
-        icon: 'error',
-        iconColor: 'var(--text-primary)',
-        color: 'var(--text-primary)',
-        confirmButtonColor: 'var(--text-primary)'
-      })
+      Flasher('failed', 'Failed to Update Note', error.message)
     }
   }
 

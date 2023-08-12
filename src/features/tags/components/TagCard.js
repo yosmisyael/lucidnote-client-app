@@ -2,10 +2,7 @@ import { MdOutlineModeEdit, MdOutlineClose, MdOutlineCheck } from 'react-icons/m
 import { BsTrash } from 'react-icons/bs'
 import style from '../assets/tagCard.module.css'
 import { useState, useRef, useEffect } from 'react'
-import Swal from 'sweetalert2'
-import withReactContent from 'sweetalert2-react-content'
-
-const MySwal = withReactContent(Swal)
+import Flasher from 'src/components/Flasher'
 
 const TagCard = ({ id, tagName }) => {
   const [editMode, setEditMode] = useState(false)
@@ -47,77 +44,24 @@ const TagCard = ({ id, tagName }) => {
         const { errors } = await response.json()
         throw new Error(errors)
       }
-      MySwal.fire({
-        icon: 'success',
-        iconColor: 'var(--text-primary)',
-        title: 'Tag updated successfully',
-        showConfirmButton: false,
-        timer: 1500
-      })
+      Flasher('success', 'Update Success',null, 1500)
       setEditMode(!editMode)
     } catch (error) {
       inputTagRef.current.focus()
-      MySwal.fire({
-        title: <p>Update Tag Failed</p>,
-        text: error.message,
-        icon: 'error',
-        iconColor: 'var(--text-primary)',
-        color: 'var(--text-primary)',
-        confirmButtonColor: 'var(--text-primary)'
-      })
-      
+      Flasher('failed', 'Failed to Update', error.message)
     }
   } 
 
   const handleDelete = async () => {
     const tagId = inputTagRef.current.getAttribute('data-id')
-    try {
-      MySwal.fire({
-        title: 'Are you sure?',
-        text: "You won't be able to revert this!",
-        icon: 'warning',
-        iconColor: 'var(--text-primary)',
-        showCancelButton: true,
-        confirmButtonColor: 'var(--text-primary)',
-        cancelButtonColor: 'var(--secondary-color)',
-        confirmButtonText: 'Delete',
-        customClass: {
-          cancelButton: style.customCancelButton
-        }
-      }).then(async (result) => {
-        if (result.isConfirmed) {
-          const response = await fetch(`http://localhost:3100/api/tags/${tagId}`, {
-            method: 'DELETE',
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': localStorage.getItem('token')
-            }
-          })
-          if (response.status !== 200) {
-            const { errors } = await response.json()
-            throw new Error(errors)
-          }
-          MySwal.fire({
-            title: <p>Delete Tag Success</p>,
-            text: 'Your tag has been deleted.',
-            icon: 'success',
-            iconColor: 'var(--text-primary)',
-            color: 'var(--text-primary)',
-            confirmButtonColor: 'var(--text-primary)'
-          })
-        }
-      })
-
-    } catch (error) {
-      MySwal.fire({
-        title: <p>Delete Tag Failed</p>,
-        text: error.message,
-        icon: 'error',
-        iconColor: 'var(--text-primary)',
-        color: 'var(--text-primary)',
-        confirmButtonColor: 'var(--text-primary)'
-      })
-    }
+    const deleteConfirm = await Flasher('dialog')
+    deleteConfirm(`http://localhost:3100/api/tags/${tagId}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': localStorage.getItem('token')
+      }
+    })
   }
 
   return (

@@ -6,10 +6,7 @@ import { BsTags } from 'react-icons/bs'
 import { useNavigate } from 'react-router-dom'
 import { useState, useRef } from 'react'
 import { MdOutlineClose, MdOutlineCheck } from 'react-icons/md'
-import Swal from 'sweetalert2'
-import withReactContent from 'sweetalert2-react-content'
-
-const MySwal = withReactContent(Swal) 
+import Flasher from 'src/components/Flasher'
 
 const CreateNote = () => {
   const navigate = useNavigate()  
@@ -61,14 +58,7 @@ const CreateNote = () => {
     }
     navigate('/user/notes')
     } catch (error) {
-      MySwal.fire({
-        title: <p>Failed to Save</p>,
-        text: error.message,
-        icon: 'error',
-        iconColor: 'var(--text-primary)',
-        color: 'var(--text-primary)',
-        confirmButtonColor: 'var(--text-primary)'
-      })
+      Flasher('failed', 'Failed to Save', error.message)
     }
   }
   return (
