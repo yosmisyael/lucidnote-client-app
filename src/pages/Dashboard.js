@@ -35,9 +35,7 @@ const Dashboard = () => {
         setUser(null)
       }
     }
-    if (!user) {
-      getUserData()
-    }
+    getUserData()
   }, [user, setUser])
   
   if (!user) {
@@ -47,7 +45,7 @@ const Dashboard = () => {
     </section>
     )
   }
-
+  
   const logoutHandler = async () => {
     setLoader(true)
     logout('http://localhost:3100/api/users/logout')
