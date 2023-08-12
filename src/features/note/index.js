@@ -18,16 +18,8 @@ const Notes = () => {
   const [noteList, setNoteList] = useState([])
   const [keyword, setKeyword] = useState('')
 
-  const customNotFoundStyle = {
-    display: 'flex', 
-    justifyContent: 'center', 
-    alignItems: 'center',
-    fontSize: '1.3rem',
-    fontWeight: '700',
-    position: 'fixed',
-    width: '100%',
-    minHeight: '100vh',
-    zIndex: '1'
+  const additionalStyle = {
+    transform: 'translateY(-21%)'
   }
 
   const triggerTagDialog = () => {
@@ -146,14 +138,17 @@ const Notes = () => {
       {selectedTags.length !== 0 && (
         <div className={style.filterWrapper}>
           <h3>Filter by tags:</h3>
-          <div className={style.tagContainer}>
-            {selectedTags.map(item => (
-              <div key={item.id} className={style.tag}>{item.tagName}</div>
-            ))}
+          <div className={style.bodyWrapper}>
+            <div className={style.tagContainer}>
+              {selectedTags.map(item => (
+                <div key={item.id} className={style.tag}>{item.tagName}</div>
+              ))}
+            </div>
+            <div className={style.closeButton} onClick={() => setSelectedTags([])}><MdOutlineClose size={24} /></div>
           </div>
         </div>
       )}
-      <div className={style.noteWrapper} style={selectedTags.length === 0 ? {paddingTop: '4rem'} : {}}>
+      <div className={style.noteWrapper} style={(selectedTags.length === 0) && (noteList.length !== 0) ? {paddingTop: '4rem'} : {}}>
         { noteList.length !== 0 ?
           (noteList.map(note => (
           <Card 
@@ -165,7 +160,7 @@ const Notes = () => {
             body={note.body} 
           />
           ))) :
-          <div style={customNotFoundStyle}>No tags found</div>
+          <div className={style.customNotFoundStyle} style={selectedTags.length !== 0 ? additionalStyle : {}}>No notes found</div>
         }
       </div>
       <div className={style.buttonNav} onClick={() => navigate('/user/notes/add')}>
