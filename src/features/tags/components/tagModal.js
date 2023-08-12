@@ -1,7 +1,7 @@
-import { useRef } from 'react';
-import style from '../assets/tagModal.module.css';
-import Button from 'src/components/Button';
-import { Input } from 'src/components/FormComponent';
+import { useRef } from 'react'
+import style from '../assets/tagModal.module.css'
+import Button from 'src/components/Button'
+import { Input } from 'src/components/FormComponent'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 
@@ -9,6 +9,8 @@ const MySwal = withReactContent(Swal)
 
 const TagModal = ({ handlerModal }) => {
   const inputTagRef = useRef()
+
+  inputTagRef.current.focus()
 
   const handleAdd = async () => {
     const tagName = inputTagRef.current.value
@@ -56,7 +58,7 @@ const TagModal = ({ handlerModal }) => {
         <Button buttonName='submit' buttonType='primary' func={handleAdd} />
       </div>
     </div>
-  );
+  )
 }
  
-export default TagModal;
+export default TagModal
