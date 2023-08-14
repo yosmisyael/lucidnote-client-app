@@ -4,13 +4,17 @@ import Button from 'src/components/Button'
 import { Input } from 'src/components/FormComponent'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
-
-const MySwal = withReactContent(Swal)
+import { useEffect } from 'react'
 
 const TagModal = ({ handlerModal }) => {
+  const MySwal = withReactContent(Swal)
   const inputTagRef = useRef()
 
-  inputTagRef.current.focus()
+  useEffect(() => {
+    if (inputTagRef.current) {
+      inputTagRef.current.focus()
+    }
+  }, [])
 
   const handleAdd = async () => {
     const tagName = inputTagRef.current.value
