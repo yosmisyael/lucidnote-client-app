@@ -14,6 +14,7 @@ const UpdateNote = () => {
   const [quillContent, setQuillContent] = useState("")
   const [tagDialog, setTagDialog] = useState(false)
   const [selectedTags, setSelectedTags] = useState([])
+  const [prevTags, setPrevTags] = useState([])
   const pathname = window.location.pathname
   const id = pathname.split('/')[3]
 
@@ -56,6 +57,7 @@ const UpdateNote = () => {
       }
       const { data } = await response.json()
       setSelectedTags(data)
+      setPrevTags(data)
     } catch (error) {
       return error
     }
@@ -80,8 +82,9 @@ const UpdateNote = () => {
         throw new Error(error)
       }
       
-      if (selectedTags.length !== 0) {
+      if (selectedTags !== prevTags) {
         const attachedTags = selectedTags.map(({ id }) => id)
+        
         await fetch(`http://localhost:3100/api/notes/${id}/tags`, {
           method: "PUT",
           headers: {
@@ -93,6 +96,7 @@ const UpdateNote = () => {
           })
         })
       }
+
       navigate(`/user/notes/${id}`)
     } catch (error) {
       Flasher('failed', 'Failed to Update Note', error.message)
@@ -106,7 +110,7 @@ const UpdateNote = () => {
 
   return (
     <section className={style.container}>
-      { tagDialog && <TagModal triggerTagDialog={triggerTagDialog} selectedTags={selectedTags} setSelectedTags={setSelectedTags} />}
+      {tagDialog && <TagModal triggerTagDialog={triggerTagDialog} selectedTags={selectedTags} setSelectedTags={setSelectedTags} />}
       <div className={style.navbar}>
         <div className={style.navigate} onClick={() => navigate('/user/notes')}>
           <MdOutlineClose size={24}/>
@@ -122,9 +126,9 @@ const UpdateNote = () => {
         <Input value={title} onChange={(e) => setTitle(e.target.value)} />
         <div className={style.tagButton} onClick={triggerTagDialog}><BsTags /> Tag:</div>
         <div className={style.tagsContainer}>
-          { selectedTags.length !== 0 && selectedTags.map((item) => (
-            <div key={ item.id } className={ style.tag }>{ item.tagName }</div>
-          )) }
+          {selectedTags.length !== 0 && selectedTags.map((item) => (
+            <div key={item.id} className={style.tag}>{item.tagName}</div>
+          ))}
         </div>
         <TextEditor quillContent={quillContent} setQuillContent={setQuillContent} />
       </div>
