@@ -32,7 +32,6 @@
   border-bottom: .25rem solid var(--text-primary);
   padding-bottom: .25rem;
 }
-
 .container .btnAdd {
   position: fixed;
   display: flex;
@@ -46,7 +45,16 @@
   background-color: var(--text-primary);
   color: var(--primary-color);
 }
-
+.custom {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100%;
+  width: 100%;
+}
+.custom h2 {
+  font-size: 1.3rem;
+}
 @media screen and (max-width: 1024px) {
   .container .wrapper {
     margin: .5rem 2rem;

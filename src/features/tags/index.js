@@ -9,11 +9,13 @@ import { useState, useEffect } from 'react'
 const TagsFeature = () => {
   const navigate = useNavigate()
   const [tagConfigurationModal, setTagConfigurationModal] = useState(false)
+
   const handlerModal = () => {
     setTagConfigurationModal(!tagConfigurationModal)
   }
 
   const [tagList, setTagList] = useState([])
+  
   const getTags = async () => {
     const response = await fetch(`http://localhost:3100/api/tags/dale`, {
       method: 'GET',
@@ -25,6 +27,7 @@ const TagsFeature = () => {
     const { data } = await response.json()
     setTagList(data)
   }
+  
   useEffect(() => {
     getTags()
   }, [tagList])
@@ -39,9 +42,12 @@ const TagsFeature = () => {
       <div className={style.header}>
         <h1>Tag List <BsTags /></h1>
       </div>
-      { tagList.map(tag => (
+      {tagList.length !== 0 ? (
+        tagList.map(tag => (
         <TagCard key={ tag.id } id={ tag.id } tagName={ tag.tagName }/>
-      ))}
+      ))) :
+      (<div className={style.custom}><h2>No tags found</h2></div>)
+      }
       <div className={style.btnAdd} onClick={handlerModal}> 
         <MdAddHome size={24}/> Add Tag
       </div>

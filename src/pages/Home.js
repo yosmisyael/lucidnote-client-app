@@ -26,7 +26,7 @@ const Home = () => {
         <div className={style.col1}>
           <h1><u>Capture</u>, <u>Organize</u>, and <u>Unleash</u> Your Ideas!</h1>
           <p>
-            Keep capturing your ideas with this app full of creativity<FcIdea /> and productivity<FcBullish />
+            Keep capturing your ideas with this app full of creativity<FcIdea className={style.icon} /> and productivity<FcBullish />
           </p>
           <div className={style.btnWrapper}>
             <Button buttonName='Get Started' buttonType='primary' func={() => navigate('/authentication')} />
