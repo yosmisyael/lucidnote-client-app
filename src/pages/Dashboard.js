@@ -21,21 +21,23 @@ const Dashboard = () => {
   }
 
   useEffect(() => {
-    const getUserData = async () => {
-      try {
-        const response = await fetch('http://localhost:3100/api/users/current', {
-          method: 'GET',
-          headers: {
-            'Authorization': localStorage.getItem('token'),
-          }
-        })
-        const { data } = await response.json()
-        setUser(data)
-      } catch (error) {
-        setUser(null)
+    if (!user) {
+      const getUserData = async () => {
+        try {
+          const response = await fetch('http://localhost:3100/api/users/current', {
+            method: 'GET',
+            headers: {
+              'Authorization': localStorage.getItem('token'),
+            }
+          })
+          const { data } = await response.json()
+          setUser(data)
+        } catch (error) {
+          setUser(null)
+        }
       }
+      getUserData()
     }
-    getUserData()
   }, [user, setUser])
   
   if (!user) {

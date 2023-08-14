@@ -5,9 +5,12 @@ import { BsPerson, BsShieldLock, BsFillEyeFill, BsFillEyeSlashFill } from 'react
 import { useState, useRef } from 'react'
 import login from 'src/api/login'
 import { useNavigate } from 'react-router-dom'
+import { useContext } from 'react'
+import { AuthContext } from 'src/contexts/AuthContext'
 
 const SignIn = () => {
   const navigate = useNavigate()
+  const { setUser } = useContext(AuthContext)
 
   const [passwordVisibility, setPasswordVisibility] = useState(false)
   const showPassword = () => {
@@ -30,9 +33,21 @@ const SignIn = () => {
     }
     try {
       const response = await login('http://localhost:3100/api/users/login', data)
+      
       if (response.status === 200) {
+        const userData = await fetch('http://localhost:3100/api/users/current', {
+          method: 'GET',
+          headers: {
+            'Authorization': localStorage.getItem('token')
+          }
+        })
+
+        const result = await userData.json()
+        setUser(result.data)
+        
         usernameRef.current.value = ''
         passwordRef.current.value = ''
+        
         navigate('/user')
       }
     } catch (error) {
