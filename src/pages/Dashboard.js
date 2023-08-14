@@ -61,12 +61,12 @@ const Dashboard = () => {
   const getTime = () => {
     const time = new Date(Date.now()).getHours()
     switch (true) {
-      case time > 12:
-        return 'afternoon'
-      case time > 18:
-        return 'evening'
       case time > 22:
         return 'night'
+      case time > 18:
+          return 'evening'
+      case time > 12:
+        return 'afternoon'
       default:
         return 'morning'
     } 
